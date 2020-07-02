@@ -4,24 +4,29 @@ import { getCandidate } from "./satData"
 
 const getData = (totalCandidates) => {
   let data = []
-  const SIMULATIONS = 2500
+  const SIMULATIONS = 5000
 
-  for (let benchmarkScore = 1400; benchmarkScore <= 2400; benchmarkScore += 20) {
-    let passedThreshold = 0
-    for (let _ = 0; _ < SIMULATIONS; _++) {
-      const candidatesPercentages = []
-      for (let i = 0; i < totalCandidates; i++) {
-        candidatesPercentages.push(Math.random())
-      }
-      const bestCandidate = getCandidate(Math.max(...candidatesPercentages))
-      if (bestCandidate.score >= benchmarkScore) {
-        ++passedThreshold
-      }
+  const bestCandidates = []
+
+  for (let _ = 0; _ < SIMULATIONS; _++) {
+    const candidatesPercentages = []
+    for (let i = 0; i < totalCandidates; i++) {
+      candidatesPercentages.push(Math.random())
     }
-    const passRate = 100 * passedThreshold / SIMULATIONS
+    const bestCandidate = getCandidate(Math.max(...candidatesPercentages))
+    bestCandidates.push(bestCandidate)
+  }
+  bestCandidates.sort((a, b) => a.score - b.score)
+  console.log(bestCandidates)
+  let i = 0
+  for (let benchmarkScore = 1400; benchmarkScore <= 2400; benchmarkScore += 20) {
+    while (i < bestCandidates.length && bestCandidates[i].score < benchmarkScore) {
+      ++i
+    }
+
     data.push({
       x: benchmarkScore,
-      passRate: passRate
+      passRate: 1 - (i + 1) / bestCandidates.length
     })
   }
   return data
@@ -43,9 +48,10 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 export default props => {
   let totalCandidatesInput
-  const [totalCandidates, setTotalCandidates] = useState(20);
+  const [totalCandidates, setTotalCandidates] = useState(50)
 
   const handleSubmit = event => {
+    console.log(event)
     event.preventDefault()
     setTotalCandidates(totalCandidatesInput)
   }
@@ -59,7 +65,7 @@ export default props => {
             placeholder={50}
             type="number"
             min="1"
-            max="99"
+            max="100"
           />
         </label>
         <input type="submit" value="Submit"/>

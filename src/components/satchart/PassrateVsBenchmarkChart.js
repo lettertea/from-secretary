@@ -26,7 +26,8 @@ const getData = (totalCandidates) => {
 
     data.push({
       x: benchmarkScore,
-      passRate: 1 - (i + 1) / bestCandidates.length
+      passRate: (1 - (i + 1) / bestCandidates.length) * 100,
+      percentile: bestCandidates[i].percentile,
     })
   }
   return data
@@ -35,9 +36,16 @@ const getData = (totalCandidates) => {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active) {
     return (
-      <div style={{ padding: "3px 8px", borderRadius: 3, backgroundColor: "rgba(23, 23, 23, 0.85)", color: "white" }}>
-        <div>Benchmark Score: {label}</div>
-        <div>{`Pass Rate: ${(payload[0].payload.passRate).toFixed(2)}%`}</div>
+      <div style={{
+        padding: "3px 8px",
+        width: 250,
+        borderRadius: 3,
+        backgroundColor: "rgba(23, 23, 23, 0.85)",
+        color: "white",
+      }}>
+        <div>{(payload[0].payload.passRate).toFixed(2)}% chance the best candidate
+          scored {label} ({payload[0].payload.percentile.toFixed(1)} percentile) or greater
+        </div>
       </div>
     )
   }
@@ -83,9 +91,8 @@ export default props => {
         <XAxis dataKey={"x"} label={{ value: "Benchmark Score", position: "bottom" }}/>
         <YAxis
           label={{
-            value: "Pass Rate (%)",
-            angle: -90,
-            textAnchor: "middle",
+            value: "Likeliness (%)",
+            position: "insideLeft", angle: -90, dy: 40,
           }}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Line type="monotone" dataKey="passRate" stroke="#8884d8" activeDot={{ r: 8 }}/>

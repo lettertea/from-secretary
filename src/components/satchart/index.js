@@ -1,14 +1,41 @@
 import React from "react"
 import PassrateVsBenchmarkChart from "./PassrateVsBenchmarkChart"
 import BenchmarkVsTotalpoolChart from "./BenchmarkVsTotalpoolChart"
-import { useState } from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import AppBar from "@material-ui/core/AppBar"
+import Tabs from "@material-ui/core/Tabs"
+import Tab from "@material-ui/core/Tab"
+
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
 
 
 export default props => {
+  const [value, setValue] = React.useState(0);
   const CHARTS = [<PassrateVsBenchmarkChart/>, <BenchmarkVsTotalpoolChart/>]
-  const [chartOption, setChartOption] = useState(0)
-  return <div>
-    <button onClick={() => setChartOption(1-chartOption)}>Swap to {chartOption == 0 ? "planning" : "review"}</button>
-    {CHARTS[chartOption]}
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div>
+    <div>
+        <Tabs value={value} onChange={handleChange} indicatorColor="primary" style={{marginBottom:20}}
+              textColor="primary">
+          <Tab label="Review" {...a11yProps(0)} />
+          <Tab label="Plan" {...a11yProps(1)} />
+        </Tabs>
+    </div>
+
+      {CHARTS[value]}
   </div>
+);
 }
+

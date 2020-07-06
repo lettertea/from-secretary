@@ -82,8 +82,7 @@ export default props => {
         <YAxis
           label={{
             value: "Benchmark Score",
-            angle: -90,
-            textAnchor: "middle",
+            position: "insideLeft", angle: -90, dy: 40,
           }}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Line type="monotone" dataKey="benchmark" stroke="#8884d8" activeDot={{ r: 8 }}/>

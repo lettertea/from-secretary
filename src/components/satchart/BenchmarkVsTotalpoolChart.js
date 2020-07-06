@@ -83,7 +83,8 @@ export default props => {
           label={{
             value: "Benchmark Score",
             position: "insideLeft", angle: -90, dy: 40,
-          }}/>
+          }}
+          domain={[1400, 2400]}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Line type="monotone" dataKey="benchmark" stroke="#8884d8" activeDot={{ r: 8 }}/>
       </LineChart>

@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Button from "../components/button"
 import SatChart from "../components/satchart"
+import DiceChart from "../components/DiceChart"
 
 class IndexPage extends React.Component {
   render() {
@@ -87,6 +88,7 @@ class IndexPage extends React.Component {
           triangle because there are more ways to achieve 7 than 2. And when you keep adding more dice, the
           data points quickly begins to resemble a normal distribution.
         </p>
+        <DiceChart/>
         <p>
           I still believe the law of diminishing returns apply in the SAT scenario. The explanation
           may not be as simple as analyzing dice rolls combinations, but there are

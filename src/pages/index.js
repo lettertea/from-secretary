@@ -47,7 +47,7 @@ class IndexPage extends React.Component {
           approach, the rank of
           the best candidate found remains consistently around 1.8 with the 1/e approach.
         </p>
-        <img style={{ margin: 0 }} src="./candidate_rank.png" alt="Candidate Rank"/>
+        <img style={{ margin: 0 }} src={require("./candidate_rank.png")} alt="Candidate Rank"/>
         <figcaption>Average candidate rank, excluding failures, of 2500 simulations using the secretary approach
         </figcaption>
 

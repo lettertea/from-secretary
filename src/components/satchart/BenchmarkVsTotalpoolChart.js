@@ -5,25 +5,31 @@ import { getCandidate } from "./satData"
 const getData = (passRate) => {
   let data = []
   const SIMULATIONS = 2500
+  const MAX_CANDIDATE = 200
+  const TOTAL_CANDIDATES = SIMULATIONS * MAX_CANDIDATE
 
-  for (let totalPool = 1; totalPool <= 50; ++totalPool) {
-    const bestCandidates = []
-    for (let _ = 0; _ < SIMULATIONS; _++) {
-      const candidatesPercentages = []
-      for (let i = 0; i < totalPool; i++) {
-        candidatesPercentages.push(Math.random())
+  const bestCandidates = []
+
+  for (let i = 0; i < TOTAL_CANDIDATES; i++) {
+    const currentCandidate = Math.random()
+    const j = i % SIMULATIONS
+    if (i < SIMULATIONS) {
+      bestCandidates.push(currentCandidate)
+    } else {
+      if (j === 0) {
+        const sortedCandidates = [...bestCandidates].sort((a, b) => b - a)
+        const cutoffCandidate = getCandidate(sortedCandidates[Math.floor(bestCandidates.length * (passRate / 100))])
+        data.push({
+          x: Math.floor(i / SIMULATIONS),
+          benchmark: cutoffCandidate.score,
+          percentile: cutoffCandidate.percentile,
+        })
       }
-      bestCandidates.push(getCandidate(Math.max(...candidatesPercentages)))
+      bestCandidates[j] = Math.max(bestCandidates[j], currentCandidate)
     }
-    bestCandidates.sort((a, b) => b.score - a.score)
-    const cutoffCandidate =  bestCandidates[Math.floor(bestCandidates.length * (passRate / 100))];
-    data.push({
-      x: totalPool,
-      benchmark: cutoffCandidate.score,
-      percentile: cutoffCandidate.percentile
-    })
   }
   return data
+
 }
 
 const CustomTooltip = ({ active, payload, label }) => {

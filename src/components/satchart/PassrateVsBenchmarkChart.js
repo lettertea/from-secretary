@@ -17,7 +17,6 @@ const getData = (totalCandidates) => {
     bestCandidates.push(bestCandidate)
   }
   bestCandidates.sort((a, b) => a.score - b.score)
-  console.log(bestCandidates)
   let i = 0
   for (let benchmarkScore = 1400; benchmarkScore <= 2400; benchmarkScore += 20) {
     while (i < bestCandidates.length && bestCandidates[i].score < benchmarkScore) {
@@ -59,7 +58,6 @@ export default props => {
   const [totalCandidates, setTotalCandidates] = useState(50)
 
   const handleSubmit = event => {
-    console.log(event)
     event.preventDefault()
     setTotalCandidates(totalCandidatesInput)
   }

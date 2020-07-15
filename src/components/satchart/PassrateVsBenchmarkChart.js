@@ -73,7 +73,7 @@ export default props => {
             placeholder={50}
             type="number"
             min="1"
-            max="100"
+            max="999"
           />
         </label>
         <input type="submit" value="Submit"/>

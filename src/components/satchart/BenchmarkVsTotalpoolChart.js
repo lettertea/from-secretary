@@ -5,12 +5,13 @@ import { getCandidate } from "./satData"
 const getData = (passRate) => {
   let data = []
   const SIMULATIONS = 2500
-  const MAX_CANDIDATE = 200
+  const MAX_CANDIDATE = 100
   const TOTAL_CANDIDATES = SIMULATIONS * MAX_CANDIDATE
 
   const bestCandidates = []
 
-  for (let i = 0; i < TOTAL_CANDIDATES; i++) {
+  // Add 1 to do an extra loop to add the last cutoff candidate to data
+  for (let i = 0; i < TOTAL_CANDIDATES + 1; i++) {
     const currentCandidate = Math.random()
     const j = i % SIMULATIONS
     if (i < SIMULATIONS) {

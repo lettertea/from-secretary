@@ -71,7 +71,7 @@ function App() {
                 as well. In a small population, the difference in the candidate's percentile is large.
             </p>
             <AveragePercentile/>
-            <Typography variant={"caption"}>Candidate Percentile = (Total Population - (Candidate Rank - 1)) / (Total
+            <Typography variant={"caption"}>Candidate Percentile Mean = (Total Population - (Candidate Rank - 1)) / (Total
                 Population + 1)</Typography>
             <p>
                 But what do these percentiles mean? It just tells us how a candidate compares to their
@@ -131,29 +131,16 @@ function App() {
             <h1>A Plan and Review Approach</h1>
 
             <p>
-                The insightful thing about the secretary approach is the stopping rule. By evaluating some amount
-                of
-                candidates before deciding,
-                we get a better understanding of the candidates out there and the qualities that make them. This is
-                especially
-                important when picking a single candidate in a field that's unfamiliar. The number of rejected
-                candidates and
-                our evaluations of them can give us a good idea of what makes up the total pool
-            </p>
-            <p>
-                With the SAT data, we can infer that the difference between slightly below and above average
-                candidates isn't that significant. But the opposite is true when talking about outliers, those at the
-                tail of
-                a normal distribution. The
-                difference in scores at that range is much higher per percentile, so it might be worth it to pursue
-                those
-                candidates. The caveat is that they're much fewer in number.
+                The insightful thing about the secretary approach is the stopping rule. By evaluating some number
+                of candidates before deciding,
+                we get a better understanding of the candidates and their qualities particular behavior yields. This is
+                especially important when picking a single candidate in an unfamiliar field.
             </p>
             <SatChart/>
             <p>
                 This makes two big assumptions. The sample population follows a distribution that the SAT has and that
                 we select candidates perfectly randomly. The chart can also mislead us
-                into believing that a 99 percentile means a 2220 score in general, whereas it just means a 2220 compared
+                into believing that a 99 percentile means a 2220 score in general, whereas it just means compared
                 to the
                 sampled population. It's like shopping for watermelons in Best Buy during Winter. The best watermelon of 50
                 watermelons is going to be really good for a watermelon in Best Buy during Winter. But it

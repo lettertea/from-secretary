@@ -53,7 +53,8 @@ function App() {
             </p>
             <img style={{margin: 0}} src={require("./candidate_rank.png")} alt="Candidate Rank"/>
             <br/>
-            <Typography variant={"caption"}>Average candidate rank, excluding failures, of 2500 simulations using the secretary approach
+            <Typography variant={"caption"}>Average candidate rank, excluding failures, of 2500 simulations using the
+                secretary approach
             </Typography>
 
             <h1>
@@ -114,9 +115,12 @@ function App() {
             <p>
                 I still believe the law of diminishing returns apply in the SAT scenario. The explanation
                 may not be as simple as analyzing dice rolls combinations, but there are
-                similarities. Perhaps it's because the mean consists of people who have varying talent in test-taking and
-                spent varying amounts of resources preparing. The number of people who fit that description is far more common
-                than those at outlier ranges where only individuals that fit a particular description can score that way.
+                similarities. Perhaps it's because the mean consists of people who have varying talent in test-taking
+                and
+                spent varying amounts of resources preparing. The number of people who fit that description is far more
+                common
+                than those at outlier ranges where only individuals that fit a particular description can score that
+                way.
             </p>
             <p>
                 So this can change our approach. Getting someone in the 99 percentile compared to the 90 percentile may
@@ -147,19 +151,22 @@ function App() {
             </p>
             <SatChart/>
             <p>
-                Now these graphs just show the theoretical mean. If you evaluate just 20 candidates a bunch of times,
-                the
-                mean of the best scoring candidate is in the 95.24 percentile. There is still a possibility that
-                candidate is
-                at
-                or above the 97.56 percentile (25% chance). And there's a possibility that the best candidate is at or
-                below
-                the 83.33 percentile (12.5% chance). It really just depends on your luck.
+                This makes two big assumptions. The sample population follows a distribution that the SAT has and that
+                we select candidates perfectly randomly. The chart can also mislead us
+                into believing that a 99 percentile means a 2220 score in general, whereas it just means a 2220 compared
+                to the
+                sampled population. It's like shopping for watermelons in Best Buy during Winter. The best watermelon of 50
+                watermelons is going to be really good for a watermelon in Best Buy during Winter. But it
+                probably won't be that good compared to all watermelons that have ever existed.
+            </p>
+            <p></p>
+            <p>
+                My takeaway is that you can get a really good picture of a particular population that a behavior yields by
+                evaluating a moderate number of candidates. With the watermelon in Best Buy during winter example, I'd
+                say you can evaluate about 10 watermelons before deciding that you're out of your mind trying to get good
+                watermelons like this.
             </p>
 
-            <p>
-                It still
-            </p>
         </Typography>
     );
 }

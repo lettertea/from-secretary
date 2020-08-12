@@ -16,7 +16,8 @@ function a11yProps(index) {
 
 export default props => {
   const [value, setValue] = React.useState(0);
-  const CHARTS = [<PassrateVsBenchmarkChart/>, <BenchmarkVsTotalpoolChart/>]
+  const chartDimension = [800,500];
+  const CHARTS = [<PassrateVsBenchmarkChart chartDimension={chartDimension}/>, <BenchmarkVsTotalpoolChart chartDimension={chartDimension}/>];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

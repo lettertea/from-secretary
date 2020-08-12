@@ -78,8 +78,8 @@ export default props => {
       </p>
 
       <LineChart
-        width={600}
-        height={400}
+        width={props.chartDimension[0]}
+        height={props.chartDimension[1]}
         data={getData(passrateToUpdateChart)}
         margin={{
           top: 5, right: 30, left: 20, bottom: 40,

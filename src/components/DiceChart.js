@@ -22,6 +22,7 @@ export default () => {
 
   return (
     <div>
+        <p>
       <label>
         Total Dice (1-10):
         <input
@@ -32,6 +33,7 @@ export default () => {
           max="10"
         />
       </label>
+        </p>
     <BarChart  width={600} height={400} data={dat[totalDice]}>
       <XAxis dataKey={"x"} label={{ value: "Roll Result", position: "bottom" }}/>
       <YAxis

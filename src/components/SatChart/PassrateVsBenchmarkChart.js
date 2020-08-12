@@ -63,6 +63,7 @@ export default props => {
   }
   return (
     <div>
+      <p>
       <form onSubmit={handleSubmit}>
         <label>
           Total Candidates:
@@ -76,7 +77,7 @@ export default props => {
         </label>
         <input type="submit" value="Submit"/>
       </form>
-
+      </p>
 
       <LineChart
         width={props.chartDimension[0]}

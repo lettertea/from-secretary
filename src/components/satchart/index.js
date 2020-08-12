@@ -1,8 +1,6 @@
 import React from "react"
 import PassrateVsBenchmarkChart from "./PassrateVsBenchmarkChart"
 import BenchmarkVsTotalpoolChart from "./BenchmarkVsTotalpoolChart"
-import { makeStyles } from "@material-ui/core/styles"
-import AppBar from "@material-ui/core/AppBar"
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
 

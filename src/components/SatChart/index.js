@@ -1,6 +1,6 @@
 import React from "react"
 import PassrateVsBenchmarkChart from "./PassrateVsBenchmarkChart"
-import BenchmarkVsTotalpoolChart from "./BenchmarkVsTotalpoolChart"
+import BestscoreVsTotalpoolChart from "./BestscoreVsTotalpoolChart"
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
 
@@ -17,7 +17,7 @@ function a11yProps(index) {
 export default props => {
   const [value, setValue] = React.useState(0);
   const chartDimension = [800,500];
-  const CHARTS = [<PassrateVsBenchmarkChart chartDimension={chartDimension}/>, <BenchmarkVsTotalpoolChart chartDimension={chartDimension}/>];
+  const CHARTS = [<PassrateVsBenchmarkChart chartDimension={chartDimension}/>, <BestscoreVsTotalpoolChart chartDimension={chartDimension}/>];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

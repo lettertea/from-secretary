@@ -1,11 +1,13 @@
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts"
 import React, { useState } from "react"
 import { getCandidate } from "./satData"
+import {Typography} from "@material-ui/core";
+
+const SIMULATIONS = 2500
+const MAX_CANDIDATE = 100
 
 const getData = (passRate) => {
   let data = []
-  const SIMULATIONS = 2500
-  const MAX_CANDIDATE = 100
   const TOTAL_CANDIDATES = SIMULATIONS * MAX_CANDIDATE
 
   const bestCandidates = []
@@ -22,7 +24,7 @@ const getData = (passRate) => {
         const cutoffCandidate = getCandidate(sortedCandidates[Math.floor(bestCandidates.length * (passRate / 100))])
         data.push({
           x: Math.floor(i / SIMULATIONS),
-          benchmark: cutoffCandidate.score,
+          bestScore: cutoffCandidate.score,
           percentile: cutoffCandidate.percentile,
         })
       }
@@ -38,7 +40,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div style={{ padding: "3px 8px", borderRadius: 3, backgroundColor: "rgba(23, 23, 23, 0.85)", color: "white" }}>
         <div>Total Pool: {label}</div>
-        <div>Benchmark Score: {payload[0].payload.benchmark}</div>
+        <div>Best Score: {payload[0].payload.bestScore}</div>
         <div>Percentile: {payload[0].payload.percentile.toFixed(2)}%</div>
       </div>
     )
@@ -48,12 +50,12 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 
 export default props => {
-  let passrateInput = 50
-  const [passrateToUpdateChart, setPassrateToUpdateChart] = useState(50)
+  let likelinessInput = 50
+  const [likelinessToUpdateChart, setLikelinessToUpdateChart] = useState(50)
 
   const handleSubmit = event => {
     event.preventDefault()
-    setPassrateToUpdateChart(passrateInput)
+    setLikelinessToUpdateChart(likelinessInput)
   }
 
 
@@ -62,9 +64,9 @@ export default props => {
       <p>
         <form onSubmit={handleSubmit}>
           <label>
-            Pass Rate (%):
+            Likeliness (%):
             <input
-              onChange={event => passrateInput = event.target.value}
+              onChange={event => likelinessInput = event.target.value}
               placeholder={50}
               type="number"
               min="1"
@@ -80,7 +82,7 @@ export default props => {
       <LineChart
         width={props.chartDimension[0]}
         height={props.chartDimension[1]}
-        data={getData(passrateToUpdateChart)}
+        data={getData(likelinessToUpdateChart)}
         margin={{
           top: 5, right: 30, left: 20, bottom: 40,
         }}
@@ -88,13 +90,15 @@ export default props => {
         <XAxis dataKey={"x"} label={{ value: "Total Pool", position: "bottom" }}/>
         <YAxis
           label={{
-            value: "Benchmark Score",
+            value: "Best Score",
             position: "insideLeft", angle: -90, dy: 40,
           }}
           domain={[1400, 2400]}/>
         <Tooltip content={<CustomTooltip/>}/>
-        <Line type="monotone" dataKey="benchmark" stroke="#8884d8" activeDot={{ r: 8 }}/>
+        <Line type="monotone" dataKey="bestScore" stroke="#8884d8" activeDot={{ r: 8 }}/>
       </LineChart>
+      <Typography variant={"caption"}>Best score of varying candidate pool sizes of {SIMULATIONS} simulations</Typography>
+
     </div>
   )
 }

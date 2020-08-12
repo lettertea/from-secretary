@@ -52,8 +52,9 @@ function App() {
                 the best candidate found remains consistently around 1.8 with the 1/e approach.
             </p>
             <img style={{margin: 0}} src={require("./candidate_rank.png")} alt="Candidate Rank"/>
-            <figcaption>Average candidate rank, excluding failures, of 2500 simulations using the secretary approach
-            </figcaption>
+            <br/>
+            <Typography variant={"caption"}>Average candidate rank, excluding failures, of 2500 simulations using the secretary approach
+            </Typography>
 
             <h1>
                 Moving on from the secretary problem
@@ -61,41 +62,39 @@ function App() {
             <p>
                 In many scenarios, finding a decently good candidate is sufficient. We also don't want to use so many
                 resources rejecting a bunch of candidates just so we can get rank 1. Sure, rank 2 may be a bit worse,
-                but it
-                wouldn't be noticeable. But then how about 3? And then 4? When should we stop?
+                but it shouldn't be noticeable, right? But then how about 3? And then 4? When should we stop?
             </p>
 
             <p>
                 When it comes to large population, the difference in ranks becomes quite minimal. The opposite is true
-                as well. In a small population, the difference in the candidate's percentile is large
+                as well. In a small population, the difference in the candidate's percentile is large.
             </p>
             <AveragePercentile/>
             <Typography variant={"caption"}>Candidate Percentile = (Total Population - (Candidate Rank - 1)) / (Total
                 Population + 1)</Typography>
             <p>
-                But what do these percentiles mean? It just tells us how a candidate compares to a particular
+                But what do these percentiles mean? It just tells us how a candidate compares to their
                 population. It doesn't give much value into how they would perform.
             </p>
             <p>
-                The answer is subjective, but analyzing the data points of released SAT scores can help. CollegeBoard
-                releases the official SAT data yearly that breakdowns the percentile of how many people scored what in
-                increments of 10. I looked into
-                the <Link
+                The answer would depend on the population, but analyzing the data points of released SAT scores can
+                help. CollegeBoard
+                releases the official SAT data yearly that breakdowns how many people scored what. I looked
+                into the <Link
                 href="https://web.archive.org/web/20170106113421/https://secure-media.collegeboard.org/digitalServices/pdf/sat/sat-percentile-ranks-composite-crit-reading-math-writing-2015.pdf"
                 target="_blank" rel="noopener noreferrer">
                 2015 dataset
-            </Link>, and it more or less follows a normal distribution. Most people tend towards average, so the difference
+            </Link>, and it more or less follows a normal distribution. Most people tend towards average, so the
+                difference
                 between, say, the 30 percentile and the 70 percentile isn't that much considering the large difference
-                in
-                percentile. According to the data, it would be 350 points. And when approaching outliers, the difference
-                is
-                more significant.
+                in percentile. According to the data, it would be 350 points. And when approaching outliers, the
+                difference is more significant.
                 The difference between the 98.02 percentile and the 99.98 percentile would be 220 points.
             </p>
             <p>
-                I struggled to accept this because I've always thought improvement follows the law of diminishing
+                I struggled to accept this because I had always thought improvement followed the law of diminishing
                 returns.
-                I consider it much harder to improve from scoring 2300 to 2400 compared to from 1400 to 1500. Yet just
+                I considered it much harder to improve from scoring 2300 to 2400 compared to from 1400 to 1500. Yet just
                 going
                 up the percentile slightly at those outlier ranges, the scores jump a lot more. I thought the
                 distribution would be like an upside-down parabola, where there the difference is significantly less at
@@ -115,12 +114,9 @@ function App() {
             <p>
                 I still believe the law of diminishing returns apply in the SAT scenario. The explanation
                 may not be as simple as analyzing dice rolls combinations, but there are
-                similarities. Perhaps it's because the mean consists of people who have varying academic aptitude and
-                spent
-                varying amounts of time preparing. The number of people who fit that description is far more common
-                than those at outlier ranges where lots of time and talent are necessary. Perhaps the difference is so
-                large
-                that the law of diminishing returns appears insignificant in looking at percentile scorers.
+                similarities. Perhaps it's because the mean consists of people who have varying talent in test-taking and
+                spent varying amounts of resources preparing. The number of people who fit that description is far more common
+                than those at outlier ranges where only individuals that fit a particular description can score that way.
             </p>
             <p>
                 So this can change our approach. Getting someone in the 99 percentile compared to the 90 percentile may

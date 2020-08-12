@@ -14,7 +14,7 @@ const getData = (totalCandidates) => {
 }
 
 export default () => {
-    const [totalCandidates, setTotalCandidates] = useState(10)
+    const [totalCandidates, setTotalCandidates] = useState(50)
 
     const CustomTooltip = ({active, payload, label}) => {
         if (active) {

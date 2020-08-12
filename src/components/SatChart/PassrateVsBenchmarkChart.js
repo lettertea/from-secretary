@@ -1,11 +1,12 @@
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts"
 import React, { useState } from "react"
 import { getCandidate } from "./satData"
+import {Typography} from "@material-ui/core";
+
+const SIMULATIONS = 5000
 
 const getData = (totalCandidates) => {
   let data = []
-  const SIMULATIONS = 5000
-
   const bestCandidates = []
 
   for (let _ = 0; _ < SIMULATIONS; _++) {
@@ -96,6 +97,7 @@ export default props => {
         <Tooltip content={<CustomTooltip/>}/>
         <Line type="monotone" dataKey="passRate" stroke="#8884d8" activeDot={{ r: 8 }}/>
       </LineChart>
+        <Typography variant={"caption"}>Likeliness the best candidate will score equal to or better than particular benchmark scores after {SIMULATIONS} simulations</Typography>
     </div>
   )
 }

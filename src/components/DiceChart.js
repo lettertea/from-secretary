@@ -34,7 +34,7 @@ export default () => {
         />
       </label>
         </p>
-    <BarChart  width={600} height={400} data={dat[totalDice]}>
+    <BarChart  width={800} height={500} data={dat[totalDice]}>
       <XAxis dataKey={"x"} label={{ value: "Roll Result", position: "bottom" }}/>
       <YAxis
         allowDecimals={false}

@@ -1,6 +1,6 @@
-import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts"
-import React, { useState } from "react"
-import { getCandidate } from "./satData"
+import {CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts"
+import React, {useState} from "react"
+import {getCandidate} from "./satData"
 import {Typography} from "@material-ui/core";
 
 const SIMULATIONS = 5000

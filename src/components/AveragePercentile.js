@@ -1,4 +1,4 @@
-import {Bar, BarChart, CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts"
+import {CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts"
 import React, {useState} from "react"
 
 

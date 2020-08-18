@@ -5,6 +5,7 @@ import SatChart from "./components/SatChart";
 import Typography from "@material-ui/core/Typography";
 import AveragePercentile from "./components/AveragePercentile";
 import {Link} from "@material-ui/core";
+import SecretaryChart from "./components/SecretaryCharts/SecretaryChart";
 
 function App() {
     return (
@@ -31,7 +32,7 @@ function App() {
                 first 8) approach. The found candidate will be
                 ranked worse on average, but there's less chance of failing and the candidate will be found earlier on
                 average.</p>
-            <img style={{margin: 0}} src={require("./candidate_rank.png")} alt="Candidate Rank"/>
+            <SecretaryChart/>
             <br/>
             <Typography variant={"caption"}>Average candidate rank, excluding failures, of 2500 simulations using the
                 secretary approach

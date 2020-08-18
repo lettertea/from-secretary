@@ -17,6 +17,7 @@ const getData = (totalCandidates) => {
     const bestCandidate = getCandidate(Math.max(...candidatesPercentages))
     bestCandidates.push(bestCandidate)
   }
+  console.log(bestCandidates)
   bestCandidates.sort((a, b) => a.score - b.score)
   let i = 0
   for (let benchmarkScore = 1400; benchmarkScore <= 2400; benchmarkScore += 20) {

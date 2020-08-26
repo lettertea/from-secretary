@@ -59,7 +59,7 @@ export default () => {
                     top: 5, right: 30, left: 20, bottom: 40,
                 }}
             ><CartesianGrid strokeDasharray="3 3"/>
-                <XAxis dataKey={"x"} label={{value: "Total Population (N)", position: "bottom"}}/>
+                <XAxis dataKey={"x"} label={{value: "Total Population (N)", position: "bottom"}} interval={4}/>
                 <YAxis
                     allowDecimals={false}
                     label={{

@@ -8,7 +8,7 @@ import {Typography} from "@material-ui/core";
 
 const getData = (dependentVariable) => {
     const data = [];
-    for (let i = 2; i < 25; i++) {
+    for (let i = 2; i < 100; i++) {
         const secretarySimulationData = computeSecretarySimulations(i)
         data.push({
             x: i,

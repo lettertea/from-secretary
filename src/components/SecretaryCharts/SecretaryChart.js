@@ -83,7 +83,8 @@ export default () => {
                     }}
                 />
                 <Tooltip content={CustomTooltip}/>
-                {STRATEGIES.map((e, i) => <Line type="monotone" dataKey={e} stroke={colors[i]} activeDot={{r: 8}}/>)}
+                {/* Reverse order to match its line ordering */}
+                {STRATEGIES.slice(0).reverse().map((e, i) => <Line type="monotone" dataKey={e} stroke={colors[i]} activeDot={{r: 8}}/>)}
             </LineChart>
             <Typography variant={"caption"}>{SIMULATIONS} simulations</Typography>
         </div>

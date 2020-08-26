@@ -3,16 +3,15 @@ import React, {useState} from "react"
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import {computeSecretarySimulations, independentVariables, strategies} from "./getData";
+import {computeSecretarySimulations, DEPENDENT_VARIABLES,strategies} from "./getData";
 
-const getData = (independentVariable,dependentVariable) => {
-
+const getData = (dependentVariable) => {
     const data = [];
     for (let i = 2; i < 25; i++) {
-        const secretarySimulationData = computeSecretarySimulations("Total Pool (N)",i)
+        const secretarySimulationData = computeSecretarySimulations(i)
         data.push({
             x: i,
-            y: secretarySimulationData["Average Percentile (%)"]["1/e"]
+            y: secretarySimulationData[dependentVariable]["1/e"]
         })
     }
     return data;
@@ -20,9 +19,7 @@ const getData = (independentVariable,dependentVariable) => {
 
 export default () => {
     const [totalCandidates, setTotalCandidates] = useState(50)
-    const [independentVariable, setIndependentVariable] = React.useState("")
-    const [dependentVariable, setDependentVariable] = React.useState("")
-
+    const [dependentVariable, setDependentVariable] = React.useState("Average Percentile (%)")
 
     const CustomTooltip = ({active, payload, label}) => {
         if (active) {
@@ -45,32 +42,20 @@ export default () => {
     return (
         <div>
             <FormControl style={{minWidth: 120}}>
-                <InputLabel>Independent Variable (X Axis)</InputLabel>
-                <Select
-                    native
-                    value={independentVariable}
-                    onChange={(e) => setIndependentVariable(e.target.value)}
-                >
-                    {independentVariables.map((e, i) => <option value={e}>{e}</option>)}
-                </Select>
-            </FormControl>
-
-            <FormControl style={{minWidth: 120}}>
                 <InputLabel>Dependent Variable (Y Axis)</InputLabel>
                 <Select
                     native
-                    value={independentVariable}
+                    value={dependentVariable}
                     onChange={(e) => setDependentVariable(e.target.value)}
                 >
-                    {independentVariables.map((e, i) => <option value={e}>{e}</option>)}
+                    {DEPENDENT_VARIABLES.map((e, i) => <option value={e}>{e}</option>)}
                 </Select>
             </FormControl>
-
 
             <LineChart
                 width={800}
                 height={500}
-                data={getData(independentVariable,dependentVariable)}
+                data={getData(dependentVariable)}
                 margin={{
                     top: 5, right: 30, left: 20, bottom: 40,
                 }}

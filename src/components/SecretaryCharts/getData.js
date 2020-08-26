@@ -7,10 +7,7 @@ const CANDIDATE_PERCENTILE = "Average Percentile (%)"
 const CANDIDATE_LOCATION = "When Candidate is Found"
 const CANDIDATE_RANK = "Selected Candidate Rank"
 
-const INDEPENDENT_VARIABLES = [TOTAL_POOL, REJECT_THRESHOLD, CANDIDATE_LOCATION]
-const DEPENDENT_VARIABLES = [TOTAL_POOL, REJECT_THRESHOLD, CANDIDATE_LOCATION]
-
-export const independentVariables = [...INDEPENDENT_VARIABLES]
+export const DEPENDENT_VARIABLES = [...TOTAL_POOL, REJECT_THRESHOLD, CANDIDATE_LOCATION]
 
 const EULER_STRATEGY = "1/e"
 const QUARTER_STRATEGY = "0.25"
@@ -40,29 +37,7 @@ const simulateSecretary = (N, stopping_threshold) => {
 
 }
 
-const getSecretaryParameters = (strategy, xAxis, num) => {
-    if (xAxis === REJECT_THRESHOLD) {
-        return [num, Math.round({
-            [EULER_STRATEGY]: num * Math.E,
-            [QUARTER_STRATEGY]: num * 4,
-            [ROOT_STRATEGY]: num * num
-        }[strategy])]
-    }
-    if (xAxis === CANDIDATE_LOCATION) {
-        num = Math.round({
-            [EULER_STRATEGY]: num * Math.E,
-            [QUARTER_STRATEGY]: num ** 1.37,
-            [ROOT_STRATEGY]: num ** 1.65
-        }[strategy])
-    }
-    return [num, {
-        [EULER_STRATEGY]: num * (1 / Math.E),
-        [QUARTER_STRATEGY]: num * .25,
-        [ROOT_STRATEGY]: Math.sqrt(num)
-    }[strategy]]
-}
-
-export const computeSecretarySimulations = (independentVariable, N = 16) => {
+export const computeSecretarySimulations = (N) => {
     const results = {}
     const simulations = 250
 
@@ -72,7 +47,11 @@ export const computeSecretarySimulations = (independentVariable, N = 16) => {
     let candidatePercentileCounter = 0
 
     for (let strategy of STRATEGIES) {
-        const [totalPool, stoppingThreshold] = getSecretaryParameters(strategy, independentVariable, N)
+        const stoppingThreshold = {
+            [EULER_STRATEGY]: N * (1 / Math.E),
+            [QUARTER_STRATEGY]: N * .25,
+            [ROOT_STRATEGY]: Math.sqrt(N)
+        }[strategy]
 
         for (let _ = 0; _ < simulations; _++) {
             const secretaryResult = simulateSecretary(N, stoppingThreshold)
@@ -91,11 +70,17 @@ export const computeSecretarySimulations = (independentVariable, N = 16) => {
             successfulSimulations = 1
         }
 
-        results[TOTAL_POOL] = {...results[TOTAL_POOL], [strategy]: totalPool}
+        results[TOTAL_POOL] = {...results[TOTAL_POOL], [strategy]: N}
         results[REJECT_THRESHOLD] = {...results[REJECT_THRESHOLD], [strategy]: stoppingThreshold}
         results[SUCCESS_RATE] = {...results[SUCCESS_RATE], [strategy]: 100 * successfulSimulations / simulations}
-        results[CANDIDATE_PERCENTILE] = {...results[CANDIDATE_PERCENTILE], [strategy]: candidatePercentileCounter / successfulSimulations}
-        results[CANDIDATE_LOCATION] = {...results[CANDIDATE_LOCATION], [strategy]: candidateLocationCounter / successfulSimulations}
+        results[CANDIDATE_PERCENTILE] = {
+            ...results[CANDIDATE_PERCENTILE],
+            [strategy]: candidatePercentileCounter / successfulSimulations
+        }
+        results[CANDIDATE_LOCATION] = {
+            ...results[CANDIDATE_LOCATION],
+            [strategy]: candidateLocationCounter / successfulSimulations
+        }
         results[CANDIDATE_RANK] = {...results[CANDIDATE_RANK], [strategy]: candidateRankCounter / successfulSimulations}
     }
     return results

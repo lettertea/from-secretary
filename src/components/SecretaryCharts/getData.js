@@ -15,7 +15,7 @@ const QUARTER_STRATEGY = "0.25"
 const ROOT_STRATEGY = "sqrt(N)"
 
 const STRATEGIES = [EULER_STRATEGY, QUARTER_STRATEGY, ROOT_STRATEGY]
-export const strategies = [...STRATEGIES];
+export {STRATEGIES}
 
 const simulateSecretary = (N, stopping_threshold) => {
     const candidatePercentiles = Array(N).fill().map(() => Math.random() * 100)

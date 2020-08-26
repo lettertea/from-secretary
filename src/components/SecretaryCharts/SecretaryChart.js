@@ -1,25 +1,31 @@
 import {CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts"
-import React from "react"
+import React, {useEffect} from "react"
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import {computeSecretarySimulations, DEPENDENT_VARIABLES, SIMULATIONS} from "./getData";
+import {computeSecretarySimulations, DEPENDENT_VARIABLES, SIMULATIONS, STRATEGIES} from "./getData";
 import {Typography} from "@material-ui/core";
 
-const getData = (dependentVariable) => {
+
+const getData = (secretarySimulationData, dependentVariable) => {
     const data = [];
     for (let i = 2; i < 100; i++) {
         const secretarySimulationData = computeSecretarySimulations(i)
-        data.push({
-            x: i,
-            y: secretarySimulationData[dependentVariable]["1/e"]
-        })
+        const dataPoint = {x: i}
+        for (let strategy of STRATEGIES) {
+            dataPoint[strategy] = secretarySimulationData[dependentVariable][strategy]
+        }
+        data.push(dataPoint)
     }
     return data;
 }
 
+
 export default () => {
     const [dependentVariable, setDependentVariable] = React.useState(DEPENDENT_VARIABLES[0])
+    const secretarySimulationData = []
+
+    const colors = ["#3969b1", "#da7c30", "#3e9651"]
 
     const CustomTooltip = ({active, payload, label}) => {
         if (active) {
@@ -30,14 +36,23 @@ export default () => {
                     backgroundColor: "rgba(23, 23, 23, 0.85)",
                     color: "white"
                 }}>
-                    <div>{dependentVariable}: {payload[0].payload.y.toFixed(2)}</div>
                     <div>Total Pool: {payload[0].payload.x}</div>
+                    {payload.map(e => <div>{e.name}: {e.value.toFixed(2)}</div>)}
                 </div>
             )
         }
         return null
     }
 
+
+    useEffect(() => {
+        for (let i = 2; i < 100; i++) {
+            secretarySimulationData.push({
+                x: i,
+                data: computeSecretarySimulations(i)
+            })
+        }
+    }, [])
 
     return (
         <div>
@@ -54,7 +69,7 @@ export default () => {
             <LineChart
                 width={800}
                 height={500}
-                data={getData(dependentVariable)}
+                data={getData(secretarySimulationData, dependentVariable)}
                 margin={{
                     top: 5, right: 30, left: 20, bottom: 40,
                 }}
@@ -67,8 +82,8 @@ export default () => {
                         position: "insideLeft", angle: -90, dy: 40,
                     }}
                 />
-                <Tooltip content={<CustomTooltip/>}/>
-                <Line type="monotone" dataKey="y" stroke="#8884d8" activeDot={{r: 8}}/>
+                <Tooltip content={CustomTooltip}/>
+                {STRATEGIES.map((e, i) => <Line type="monotone" dataKey={e} stroke={colors[i]} activeDot={{r: 8}}/>)}
             </LineChart>
             <Typography variant={"caption"}>{SIMULATIONS} simulations</Typography>
         </div>

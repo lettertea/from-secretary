@@ -3,7 +3,8 @@ import React, {useState} from "react"
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import {computeSecretarySimulations, DEPENDENT_VARIABLES,strategies} from "./getData";
+import {computeSecretarySimulations, DEPENDENT_VARIABLES, SIMULATIONS, strategies} from "./getData";
+import {Typography} from "@material-ui/core";
 
 const getData = (dependentVariable) => {
     const data = [];
@@ -19,7 +20,7 @@ const getData = (dependentVariable) => {
 
 export default () => {
     const [totalCandidates, setTotalCandidates] = useState(50)
-    const [dependentVariable, setDependentVariable] = React.useState("Average Percentile (%)")
+    const [dependentVariable, setDependentVariable] = React.useState(DEPENDENT_VARIABLES[0])
 
     const CustomTooltip = ({active, payload, label}) => {
         if (active) {
@@ -30,8 +31,8 @@ export default () => {
                     backgroundColor: "rgba(23, 23, 23, 0.85)",
                     color: "white"
                 }}>
+                    <div>{dependentVariable}: {payload[0].payload.y.toFixed(2)}</div>
                     <div>Total Pool: {payload[0].payload.x}</div>
-                    <div>Percentile: {payload[0].payload.y.toFixed(2)}%</div>
                 </div>
             )
         }
@@ -41,8 +42,8 @@ export default () => {
 
     return (
         <div>
-            <FormControl style={{minWidth: 120}}>
-                <InputLabel>Dependent Variable (Y Axis)</InputLabel>
+            <FormControl style={{minWidth: 120, marginBottom: 10}}>
+                <InputLabel>Dependent Variable</InputLabel>
                 <Select
                     native
                     value={dependentVariable}
@@ -51,7 +52,6 @@ export default () => {
                     {DEPENDENT_VARIABLES.map((e, i) => <option value={e}>{e}</option>)}
                 </Select>
             </FormControl>
-
             <LineChart
                 width={800}
                 height={500}
@@ -64,13 +64,14 @@ export default () => {
                 <YAxis
                     allowDecimals={false}
                     label={{
-                        value: "Percentile",
+                        value: dependentVariable,
                         position: "insideLeft", angle: -90, dy: 40,
                     }}
                 />
                 <Tooltip content={<CustomTooltip/>}/>
                 <Line type="monotone" dataKey="y" stroke="#8884d8" activeDot={{r: 8}}/>
             </LineChart>
+            <Typography variant={"caption"}>{SIMULATIONS} simulations</Typography>
         </div>
     )
 }

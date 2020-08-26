@@ -1,13 +1,14 @@
-import binarySearch from "../binarySearch";
-
 const TOTAL_POOL = "Total Pool (N)"
 const REJECT_THRESHOLD = "Reject First N candidate(s)"
 const SUCCESS_RATE = "Success Rate (%)"
 const CANDIDATE_PERCENTILE = "Average Percentile (%)"
-const CANDIDATE_LOCATION = "When Candidate is Found"
+const CANDIDATE_LOCATION = "Candidate Location"
 const CANDIDATE_RANK = "Selected Candidate Rank"
 
-export const DEPENDENT_VARIABLES = [...TOTAL_POOL, REJECT_THRESHOLD, CANDIDATE_LOCATION]
+const SIMULATIONS = 250
+
+export {SIMULATIONS}
+export const DEPENDENT_VARIABLES = [CANDIDATE_RANK,CANDIDATE_LOCATION]
 
 const EULER_STRATEGY = "1/e"
 const QUARTER_STRATEGY = "0.25"
@@ -29,7 +30,7 @@ const simulateSecretary = (N, stopping_threshold) => {
             return {
                 candidateLocation,
                 candidatePercentile,
-                "candidateRank": binarySearch(candidatePercentiles, candidatePercentile) + 1
+                "candidateRank": candidatePercentiles.indexOf(candidatePercentile) + 1 // iterative approach is actually faster as ranks tend to be close to 1
             }
         }
     }
@@ -39,7 +40,6 @@ const simulateSecretary = (N, stopping_threshold) => {
 
 export const computeSecretarySimulations = (N) => {
     const results = {}
-    const simulations = 250
 
     let successfulSimulations = 0;
     let candidateRankCounter = 0
@@ -53,7 +53,7 @@ export const computeSecretarySimulations = (N) => {
             [ROOT_STRATEGY]: Math.sqrt(N)
         }[strategy]
 
-        for (let _ = 0; _ < simulations; _++) {
+        for (let _ = 0; _ < SIMULATIONS; _++) {
             const secretaryResult = simulateSecretary(N, stoppingThreshold)
 
             if (secretaryResult !== false) {
@@ -72,7 +72,7 @@ export const computeSecretarySimulations = (N) => {
 
         results[TOTAL_POOL] = {...results[TOTAL_POOL], [strategy]: N}
         results[REJECT_THRESHOLD] = {...results[REJECT_THRESHOLD], [strategy]: stoppingThreshold}
-        results[SUCCESS_RATE] = {...results[SUCCESS_RATE], [strategy]: 100 * successfulSimulations / simulations}
+        results[SUCCESS_RATE] = {...results[SUCCESS_RATE], [strategy]: 100 * successfulSimulations / SIMULATIONS}
         results[CANDIDATE_PERCENTILE] = {
             ...results[CANDIDATE_PERCENTILE],
             [strategy]: candidatePercentileCounter / successfulSimulations

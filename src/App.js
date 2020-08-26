@@ -33,10 +33,6 @@ function App() {
                 ranked worse on average, but there's less chance of failing and the candidate will be found earlier on
                 average.</p>
             <SecretaryChart/>
-            <br/>
-            <Typography variant={"caption"}>Average candidate rank, excluding failures, of 2500 simulations using the
-                secretary approach
-            </Typography>
             <p>
                 In many scenarios, we need a candidate that's just "good enough." Sure rank 1 sounds nice, but maybe
                 rank 2 would be okay. But then how about 3? And then 4? When should we stop?

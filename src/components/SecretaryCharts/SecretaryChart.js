@@ -1,9 +1,9 @@
 import {CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts"
-import React, {useState} from "react"
+import React from "react"
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import {computeSecretarySimulations, DEPENDENT_VARIABLES, SIMULATIONS, strategies} from "./getData";
+import {computeSecretarySimulations, DEPENDENT_VARIABLES, SIMULATIONS} from "./getData";
 import {Typography} from "@material-ui/core";
 
 const getData = (dependentVariable) => {
@@ -19,7 +19,6 @@ const getData = (dependentVariable) => {
 }
 
 export default () => {
-    const [totalCandidates, setTotalCandidates] = useState(50)
     const [dependentVariable, setDependentVariable] = React.useState(DEPENDENT_VARIABLES[0])
 
     const CustomTooltip = ({active, payload, label}) => {

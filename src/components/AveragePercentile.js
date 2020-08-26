@@ -4,7 +4,7 @@ import React, {useState} from "react"
 
 const getData = (totalCandidates) => {
     const data = [];
-    for (let i = 0; i < Math.min(totalCandidates,50); i++) {
+    for (let i = 0; i < Math.min(totalCandidates, 50); i++) {
         data.push({
             x: i + 1,
             y: 100 * ((totalCandidates - i) / (totalCandidates + 1))

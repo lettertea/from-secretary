@@ -41,12 +41,11 @@ const simulateSecretary = (N, stopping_threshold) => {
 export const computeSecretarySimulations = (N) => {
     const results = {}
 
-    let candidateRankCounter = 0
-    let candidateLocationCounter = 0
-    let candidatePercentileCounter = 0
-
     for (let strategy of STRATEGIES) {
         let successfulSimulations = 0;
+        let candidateRankCounter = 0
+        let candidateLocationCounter = 0
+        let candidatePercentileCounter = 0
 
         const stoppingThreshold = {
             [EULER_STRATEGY]: N * (1 / Math.E),

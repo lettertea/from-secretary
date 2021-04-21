@@ -2,7 +2,7 @@ const TOTAL_POOL = "Total Pool (N)"
 const REJECT_THRESHOLD = "Reject First N candidate(s)"
 const SUCCESS_RATE = "Success Rate (%)"
 const CANDIDATE_PERCENTILE = "Average Percentile (%)"
-const CANDIDATE_LOCATION = "Candidate Location"
+const CANDIDATE_LOCATION = "Selected Candidate Location"
 const CANDIDATE_RANK = "Selected Candidate Rank"
 
 const SIMULATIONS = 250

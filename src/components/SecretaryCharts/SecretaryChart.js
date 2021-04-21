@@ -85,7 +85,7 @@ export default () => {
                 <Tooltip content={CustomTooltip}/>
                 {STRATEGIES.map((e, i) => <Line type="monotone" dataKey={e} stroke={colors[i]} activeDot={{r: 8}}/>)}
             </LineChart>
-            <Typography variant={"caption"}>{SIMULATIONS} simulations</Typography>
+            <Typography variant={"caption"}>Average of running the secretary algorithm {SIMULATIONS} times</Typography>
         </div>
     )
 }

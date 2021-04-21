@@ -132,7 +132,8 @@ function App() {
             <p>
                 I think that's pretty neat though. You can get a really good picture a particular behavior yields by
                 evaluating just a moderate number of candidates. You can then make a decision of needing to evaluate
-                more candidates or stopping. I believe this issue is more relevant now than in the past due to the
+                more candidates, choosing a candidate, or changing your behavior to get a different distribution of
+                candidates. I believe this issue is more relevant now than in the past due to the
                 increase "fear of missing out" feeling we can experience due having so many options with modern
                 technology.
             </p>

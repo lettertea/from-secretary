@@ -46,60 +46,53 @@ function App() {
                 (Total
                 Population + 1)</Typography>
             <p>
-                But these percentiles just tell us how a candidate compares to their
-                population. It doesn't give much value into how they would perform.
-            </p>
-            <p>
-                The answer would depend on the population, but analyzing the data points of released SAT scores can
-                help. CollegeBoard used to release detailed breakdowns of all SAT test scores achieved in the year every
-                year, and
+                To help put these percentiles into context, analyzing SAT scores can help. CollegeBoard used
+                to release detailed breakdowns of all SAT test scores achieved in the year, and
                 the <Link
                 href="https://web.archive.org/web/20170106113421/https://secure-media.collegeboard.org/digitalServices/pdf/sat/sat-percentile-ranks-composite-crit-reading-math-writing-2015.pdf"
                 target="_blank" rel="noopener noreferrer">
                 2015 dataset
-            </Link> was the last of it. (They still release data yearly but with less information.) Every year though,
-                the
-                distribution more or less follows a normal distribution. Most people tend
-                towards average, so the difference
+            </Link> was the last of it (they still release data yearly but with less information).
+            </p>
+            <p>
+                Every year though,
+                the distribution more or less follows a normal distribution. Most people tend
+                towards the median, so the difference
                 between, say, the 30 percentile and the 70 percentile isn't that much considering the large difference
                 in percentile. According to the 2015 data, it would be 350 points. And when approaching outliers, the
                 difference per percentile is more significant.
-                The difference between the 98.02 percentile and the 99.98 percentile is 220 points.
+                The difference between the 98.02 percentile and the 99.98 percentile is 220 points despite only being
+                roughly 2 percentiles apart.
             </p>
             <p>
-                I struggled to accept this because improvement typically follows the law of diminishing
+                I struggled to accept this because I believed improvement followed the law of diminishing
                 returns.
-                It should be much harder to improve from scoring 2300 to 2400 compared to from 1400 to 1500. Yet just
+                It should have been much harder to improve from 2300 to 2400 compared to from 1400 to 1500. Yet just
                 going
-                up the percentile slightly at those outlier ranges, the scores jump a lot more compared to the range
-                around the mean. I thought the
-                distribution would be like an upside-down parabola, where there the difference is significantly less at
-                the
-                outlier ranges. But at this
-                point, I wasn't really questioning the
-                SAT data but more about why normal distributions exist.
+                up the percentile slightly at those outlier ranges, the scores jumped a lot more compared to the range
+                around the median. But at this point, I wasn't really questioning the
+                SAT data but more about why normal distributions can appear naturally.
             </p>
             <p>
                 If we roll a single die enough times, we will get a uniform distribution of results.
                 With two dice, it will look like a
                 triangle because there are more ways to achieve 7 than 2. And when we keep adding more dice, the
-                data points quickly begins to resemble a normal distribution. There are more combinations of rolls
-                that achieve the middle range of values than the outlier ranges.
+                data points quickly begin to resemble a normal distribution. There are more combinations of rolls
+                that land closer to the median value than the ones at the ends.
             </p>
             <DiceChart/>
             <p>
-                With SAT scores, the explanation
+                With the SAT score distribution, the explanation
                 may not be as simple as analyzing dice rolls combinations, but there are
-                similarities. Perhaps it's because the mean consists of people who have varying talent in test-taking
-                and
-                spent varying amounts of resources preparing. The number of people who fit that description is far more
-                common
-                than those at outlier ranges where you have to fit a particular description to score that
-                way.
-            </p>
-            <p>
-                So this can change our approach. Getting someone in the 99 percentile compared to the 90 percentile may
-                be worth it despite the extra amount of effort it takes.
+                similarities. Scoring around the median is more common because the requirements to score at that range
+                are flexible. Maybe someone is a good test taker but didn't study much. Maybe someone else is bad at
+                taking tests but studied a lot. There isn't a particular description you have to fit in order to score
+                near the median since many are acceptable. But to score at the outlier ranges like 2350+, I'd imagine
+                there isn't as much leeway.
+                Being
+                naturally bad at test taking would decrease your chances as well as being uninterested in the SAT would
+                too. There are so
+                many more filters applied at these outlier ranges that most test takers cannot score there.
             </p>
 
             <h1>A Plan and Review Approach</h1>
@@ -107,14 +100,14 @@ function App() {
             <p>
                 The insightful thing about the secretary approach is the stopping rule. By evaluating some number
                 of candidates before deciding,
-                we get a better understanding of the candidates a particular behavior yields. This is
-                especially important when picking a single candidate in an unfamiliar field. This is the "review"
-                portion of the chart below.
+                we can get a better understanding of the candidates a particular behavior yields. This is
+                especially important when picking a single candidate in an unfamiliar field. The "review"
+                portion of the chart below is meant to help with that.
             </p>
             <p>
                 The "planning" portion is more of a fun exercise in my opinion. I put less weight in it since a lot of
-                it depends on
-                chance. But if you need to be very efficient when dedicating resources to evaluate candidates, it can be
+                it depends on chance whereas when "reviewing," you can more accurately judge your luck. But if you need
+                to be very efficient when dedicating resources to evaluate candidates, it can be
                 useful.
             </p>
             <SatChart/>
@@ -132,7 +125,7 @@ function App() {
                 I think that's pretty neat though. You can get a really good picture of a particular population a
                 behavior yields by
                 evaluating just a moderate number of candidates. With the pancake example, I'd
-                say you can try out 10-20 pancakes at Applebee's before deciding that you're out of your mind trying to
+                say you can try out around 10 pancakes at Applebee's before deciding that you're out of your mind trying to
                 get good pancakes like this.
             </p>
 

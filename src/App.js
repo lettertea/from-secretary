@@ -34,12 +34,14 @@ function App() {
                 average.</p>
             <SecretaryChart/>
             <p>
-                In many scenarios, we need a candidate that's just "good enough." Sure rank 1 sounds nice, but maybe
-                rank 2 would be okay. But then how about 3? And then 4? When should we stop?
-            </p>
-            <p>
-                When it comes to large populations, the difference in ranks becomes quite minimal. The opposite is true
-                as well. In small populations, the difference in the candidate's percentile is large.
+                The sqrt(N) strategy is unique compared to fixed percentage approaches because it adapts to the
+                population size.
+                As the total pool increases, the stopping rule threshold barely increases rather than grows linearly.
+                Despite selecting lower
+                ranked candidates on average, it can be preferred for large pool sizes, even if we're not trying to be
+                pragmatic. In large sample populations, the percentile difference between the sampled population
+                becomes quite minimal when compared to the entire population. The opposite is true
+                as well. In small sample populations, the difference in the candidate's percentile is large.
             </p>
             <AveragePercentile/>
             <Typography variant={"caption"}>Candidate Percentile Mean = (Total Population - (Candidate Rank - 1)) /
@@ -87,21 +89,25 @@ function App() {
                 similarities. Scoring around the median is more common because the requirements to score at that range
                 are flexible. Maybe someone is a good test taker but didn't study much. Maybe someone else is bad at
                 taking tests but studied a lot. There isn't a particular description you have to fit in order to score
-                near the median since many are acceptable. But to score at the outlier ranges like 2350+, I'd imagine
-                there isn't as much leeway.
-                Being
-                naturally bad at test taking would decrease your chances as well as being uninterested in the SAT would
-                too. There are so
-                many more filters applied at these outlier ranges that most test takers cannot score there.
+                near the median since many are acceptable.
             </p>
-
+            <p>
+                But to score at the outlier ranges (particularly at extreme outlier ranges like 2350+), I'd imagine
+                there isn't as much leeway. You can't be
+                naturally bad at taking tests, and you can't be uninterested in doing well. You can't just take it
+                once, and you can't just take one prep course. It can be quite brutal since there
+                are so many more filters applied at these outlier ranges that only candidates that meet a particular
+                description can meet them.
+            </p>
             <h1>A Plan and Review Approach</h1>
 
             <p>
-                The insightful thing about the secretary approach is the stopping rule. By evaluating some number
-                of candidates before deciding,
+                The secretary approach isn't always the most practical approach since we may be able to select a
+                candidate we previously evaluated. But the insightful thing about it is the stopping
+                rule. By evaluating some number of candidates before deciding,
                 we can get a better understanding of the candidates a particular behavior yields. This is
-                especially important when picking a single candidate in an unfamiliar field. The "review"
+                especially important when exploring an unfamiliar field since we often have little to no
+                understanding of what makes a "good" candidate. The "review"
                 portion of the chart below is meant to help with that.
             </p>
             <p>
@@ -112,21 +118,23 @@ function App() {
             </p>
             <SatChart/>
             <p>
-                These simulations make two big assumptions. The sample population follows a distribution that the SAT
+                These simulations make two big assumptions. The population follows a distribution that the SAT
                 has and that
                 we select candidates randomly. The chart can also mislead us
-                into believing that a 99 percentile means a 2220 score in general, whereas it just means compared
-                to the sampled population. If we sample 50 pancakes at Applebee's, the best one is likely to be around a
-                "2220/2400," but it's relative to pancakes made at that particular Applebee's. Relative to world,
+                into believing that 99 percentile means a 2220 score overall, whereas it just means compared
+                to the population our behavior is yielding. If we sample 50 pancakes at Applebee's, the best one is
+                likely to be around a
+                "2220/2400," but it's relative to pancakes made at that particular Applebee's. Relative to world, or
+                overall,
                 it probably doesn't rank as high.
             </p>
             <p></p>
             <p>
-                I think that's pretty neat though. You can get a really good picture of a particular population a
-                behavior yields by
-                evaluating just a moderate number of candidates. With the pancake example, I'd
-                say you can try out around 10 pancakes at Applebee's before deciding that you're out of your mind trying to
-                get good pancakes like this.
+                I think that's pretty neat though. You can get a really good picture a particular behavior yields by
+                evaluating just a moderate number of candidates. You can then make a decision of needing to evaluate
+                more candidates or stopping. I believe this issue is more relevant now than in the past due to the
+                increase "fear of missing out" feeling we can experience due having so many options with modern
+                technology.
             </p>
 
         </Typography>

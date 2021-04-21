@@ -34,8 +34,8 @@ function App() {
                 average.</p>
             <SecretaryChart/>
             <p>
-                The sqrt(N) strategy is unique compared to fixed percentage approaches because it adapts to the
-                population size.
+                The sqrt(N) strategy is unique compared to fixed percentage approaches because of the way it adapts to
+                the population size.
                 As the total pool increases, the stopping rule threshold barely increases rather than grows linearly.
                 Despite selecting lower
                 ranked candidates on average, it can be preferred for large pool sizes, even if we're not trying to be

@@ -135,22 +135,18 @@ function App() {
                 More or less, to get a good understanding of the candidates a behavior is yielding, you probably have to
                 evaluate a decent amount of candidates. But there's a point of diminishing returns where it's unlikely
                 you will
-                find a candidate that will perform any better or worse than what you've already seen. You can then make
-                a
-                decision of needing to evaluate
+                find a candidate that will perform any better or worse than what you've already seen. You can decide
+                between needing to evaluate
                 more candidates, choosing a candidate, or changing your behavior to get a different distribution of
                 candidates.
             </p>
             <h1>Motivation</h1>
-            <p>I feel that there is a lot of pressure to find the "perfect" person to marry, to find the "dream" job, to
-                find
-                the best Node package for that obscure React app no one will look at, and lots of
-                other things where we spend so much time trying to narrow it down to a single choice. It's for a good
-                reason
-                though. Some of these things can have a huge impact on our quality of life, and making sure we make the
-                right
-                decision
-                can be that absolute factor.
+            <p>I feel like there's a lot of pressure to find the "perfect" person to marry, the "dream" job, or the
+                best Node package for that obscure React app no one will look at. It has often come to a point where we
+                spend
+                more time searching than actually benefiting from the decision. But it can be for a good reason.
+                Some of these things can have a huge impact on our quality of life, and making sure we make the
+                right decision is a small price to pay compared to its consequence.
             </p>
             <p>Part of it too, I think, is
                 that we have so many options exposed to us through technology that it makes it extremely difficult to
@@ -159,6 +155,8 @@ function App() {
                 strategy.
                 Plus, playing with random number generation is addicting, and developing these charts helped satiate
                 that feeling.
+                make a decision. It sometimes makes me feel nauseous when I stop to think about how much content I've
+                churned through, whereas when I was younger, I was more content with a fraction of the choices I have now.
             </p>
 
         </Typography>

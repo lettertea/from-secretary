@@ -103,7 +103,9 @@ function App() {
 
             <p>
                 The secretary approach isn't always the most practical approach since we may be able to select a
-                candidate we previously evaluated. But the insightful thing about it is the stopping
+                candidate we previously evaluated and that it doesn't scale very well to large populations, both in
+                practicality
+                and effectiveness. But the insightful thing about it is the stopping
                 rule. By evaluating some number of candidates before deciding,
                 we can get a better understanding of the candidates a particular behavior yields. This is
                 especially important when exploring an unfamiliar field since we often have little to no
@@ -130,12 +132,15 @@ function App() {
             </p>
             <p></p>
             <p>
-                I think that's pretty neat though. You can get a really good picture a particular behavior yields by
-                evaluating just a moderate number of candidates. You can then make a decision of needing to evaluate
+                More or less, to get a good understanding of the candidates a behavior is yielding, you probably have to
+                evaluate a decent amount of candidates. But there's a point of diminishing returns where it's unlikely
+                you will
+                find a candidate that will perform any better or worse than what you've already seen. You can then make
+                a
+                decision of needing to evaluate
                 more candidates, choosing a candidate, or changing your behavior to get a different distribution of
-                candidates. I believe this issue is more relevant now than in the past due to the
-                increase "fear of missing out" feeling we can experience due having so many options with modern
-                technology.
+                candidates.
+            </p>
             </p>
 
         </Typography>

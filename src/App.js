@@ -145,16 +145,11 @@ function App() {
                 best Node package for that obscure React app no one will look at. It has often come to a point where we
                 spend
                 more time searching than actually benefiting from the decision. But it can be for a good reason.
-                Some of these things can have a huge impact on our quality of life, and making sure we make the
-                right decision is a small price to pay compared to its consequence.
+                Some of these things have a huge impact on our lives, and making sure we make the
+                right decision is a small price to pay compared to their consequences.
             </p>
             <p>Part of it too, I think, is
                 that we have so many options exposed to us through technology that it makes it extremely difficult to
-                make a
-                decision. We can ignore some options to make it easier to choose, but I felt like there was a better
-                strategy.
-                Plus, playing with random number generation is addicting, and developing these charts helped satiate
-                that feeling.
                 make a decision. It sometimes makes me feel nauseous when I stop to think about how much content I've
                 churned through, whereas when I was younger, I was more content with a fraction of the choices I have now.
             </p>

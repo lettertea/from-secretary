@@ -141,6 +141,24 @@ function App() {
                 more candidates, choosing a candidate, or changing your behavior to get a different distribution of
                 candidates.
             </p>
+            <h1>Motivation</h1>
+            <p>I feel that there is a lot of pressure to find the "perfect" person to marry, to find the "dream" job, to
+                find
+                the best Node package for that obscure React app no one will look at, and lots of
+                other things where we spend so much time trying to narrow it down to a single choice. It's for a good
+                reason
+                though. Some of these things can have a huge impact on our quality of life, and making sure we make the
+                right
+                decision
+                can be that absolute factor.
+            </p>
+            <p>Part of it too, I think, is
+                that we have so many options exposed to us through technology that it makes it extremely difficult to
+                make a
+                decision. We can ignore some options to make it easier to choose, but I felt like there was a better
+                strategy.
+                Plus, playing with random number generation is addicting, and developing these charts helped satiate
+                that feeling.
             </p>
 
         </Typography>

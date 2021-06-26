@@ -145,8 +145,8 @@ function App() {
                 best Node package for that obscure React app no one will look at. It has often come to a point where we
                 spend
                 more time searching than actually benefiting from the decision. But it can be for a good reason.
-                Some of these things have a huge impact on our lives, and making sure we make the
-                right decision is a small price to pay compared to their consequences.
+                Some of these things have huge impacts on our lives, and making sure we make the
+                right decisions is a small price to pay compared to their consequences.
             </p>
             <p>Part of it too, I think, is
                 that we have so many options exposed to us through technology that it makes it extremely difficult to

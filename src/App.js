@@ -11,37 +11,32 @@ function App() {
     return (
         <Typography className="App">
             <Typography variant={"h2"}>The Secretary Problem</Typography>
-            <p>If you absolutely need to find the best candidate in a limited pool, and if you can only judge
-                one candidate at a time and can't go back, consider the secretary algorithm. It uses an "optimal
-                stopping"
-                approach by always rejecting the first X amount of candidates before accepting one. Done
-                correctly, that candidate will very likely be rank 1 or 2 of the entire pool.</p>
-            <p>But it depends on the stopping strategy. A popular one is the 36.8%, or "1/e", approach where the first
-                36.8% of the total candidates are rejected. If
-                we have 100 candidates to choose from, we would evaluate then reject the first 37 candidates. It doesn't
-                matter how good
-                they are. The rule is to always reject them. Then pick the first of the remaining 63 candidates that is
-                better than all of the 37 rejected.</p>
+            <p>If you absolutely need to find the best candidate in a limited pool, and if you can only judge one
+                candidate at a time and can't go back, consider the secretary algorithm. It uses an "optimal stopping"
+                approach by always rejecting the first X number of candidates before choosing one. Done correctly, that
+                candidate will very likely be rank 1 or 2 of the entire pool.
+            </p>
+            <p>The variation that will achieve that result is called the 36.8%, or "1/e" (‘e’ being Euler’s number),
+                approach where the first 36.8% of the total candidates are always rejected. If we have 100 candidates to
+                choose from, we would evaluate then reject the first 37 candidates. It doesn't matter how good they are.
+                The rule is to always reject them. Then pick the first of the remaining 63 candidates that is better
+                than all of the 37 rejected.</p>
             <p>
                 This strategy is failure-prone and restrictive, however. There's a 37% chance the best candidate of the
-                100
-                is within the first 37 rejected. That means we will get to the end of the candidate list without
-                choosing anyone because we would be trying to find a candidate better than the best. And the fact is
-                that at minimum, we have to reject 37 candidates.</p>
-            <p>There are more lax strategies like the 25% approach or the sqrt(N) (e.g. total pool is 64, so reject
-                first 8) approach. The found candidate will be
-                ranked worse on average, but there's less chance of failing and the candidate will be found earlier on
-                average.</p>
+                100 is within the first 37 rejected. That means we will get to the end of the candidate list without
+                choosing anyone because we would be trying to find a candidate better than the best. And to make it even
+                worse, we have to reject at least 37 candidates—a waste of time and energy for everyone.</p>
+            <p>In contrast, there are more lax strategies like the 25% or sqrt(N) (e.g., total pool, N, is 64, so reject
+                the first 8) approach. The found candidate will be ranked worse on average, but there's less chance of
+                failing and the candidate will be found earlier on average.</p>
             <SecretaryChart/>
             <p>
                 The sqrt(N) strategy is unique compared to fixed percentage approaches because of the way it adapts to
-                the population size.
-                As the total pool increases, the stopping rule threshold barely increases rather than grows linearly.
-                Despite selecting lower
-                ranked candidates on average, it can be preferred for large pool sizes, even if we're not trying to be
-                pragmatic. In large sample populations, the percentile difference between the sampled population
-                becomes quite minimal when compared to the entire population. The opposite is true
-                as well. In small sample populations, the difference in the candidate's percentile is large.
+                the population size. As the total pool increases, the stopping rule threshold barely increases. It does
+                not grow linearly. It reduces the burden of executing the secretary algorithm and does not compromise
+                candidate performance too much. This is because in large pools, or N, values, the overall percentile
+                difference between each candidate becomes quite minimal. The opposite is true as well. In small sample
+                populations, the difference in the candidate's percentile is large.
             </p>
             <AveragePercentile/>
             <Typography variant={"caption"}>Candidate Percentile Mean = (Total Population - (Candidate Rank - 1)) /
@@ -92,12 +87,11 @@ function App() {
                 near the median since many are acceptable.
             </p>
             <p>
-                But to score at the outlier ranges (particularly at extreme outlier ranges like 2350+), I'd imagine
-                there isn't as much leeway. You can't be
-                naturally bad at taking tests, and you can't be uninterested in doing well. You can't just take it
-                once, and you can't just take one prep course. It can be quite brutal since there
-                are so many more filters applied at these outlier ranges that only candidates that meet a particular
-                description can meet them.
+                But to score at the extreme outlier ranges, there isn't much leeway. You can't be naturally bad at
+                taking tests, and you can't be uninterested in doing well. You can't just take it once, and you can't
+                just take one prep course. You have to have it all—or be extremely exceptional in some aspects to make
+                up for the others. It can be quite brutal since there are so many more filters applied at these outlier
+                ranges that only candidates that meet a particular description can meet them.
             </p>
             <h1>A Plan and Review Approach</h1>
 
@@ -142,16 +136,17 @@ function App() {
             </p>
             <h1>Motivation</h1>
             <p>I feel like there's a lot of pressure to find the "perfect" person to marry, the "dream" job, or the
-                best Node package for that obscure React app no one will look at. It has often come to a point where we
+                "best" Node package for that obscure React app no one will look at. It has often come to a point where we
                 spend
-                more time searching than actually benefiting from the decision. But it can be for a good reason.
+                more time searching than actually benefiting from the decision. But the thing is—it can be for a good reason.
                 Some of these things have huge impacts on our lives, and making sure we make the
                 right decisions is a small price to pay compared to their consequences.
             </p>
             <p>Part of it too, I think, is
                 that we have so many options exposed to us through technology that it makes it extremely difficult to
                 make a decision. It sometimes makes me feel nauseous when I stop to think about how much content I've
-                churned through, whereas when I was younger, I was more content with a fraction of the choices I have now.
+                churned through, whereas when I was younger, I was more content with a fraction of the choices I have
+                now.
             </p>
 
         </Typography>

@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Container, createMuiTheme} from "@material-ui/core";
 import {ThemeProvider} from "@material-ui/styles";
+import DistributionComparison from "./components/DistributionComparison"
 
 require('typeface-montserrat');
 
@@ -23,7 +24,7 @@ ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
             <Container maxWidth={"md"}>
-                <App/>
+                <DistributionComparison/>
             </Container>
         </ThemeProvider>
     </React.StrictMode>,

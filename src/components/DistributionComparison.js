@@ -18,17 +18,22 @@ import NormalDistribution from "normal-distribution";
   // 75% Percentile: 1580 -> 2390 | SD: 3.1% (74/2400) | SD inferred using this method: https://stats.stackexchange.com/q/506434
   // 
 
-const averageDistribution = new NormalDistribution(621, 135);
-const betterDistribution = new NormalDistribution(967, 31);
+  // CSULB Fall 2017:
+  // Both local and non-local mean and SD are provided here: 
+  // https://data.ir.csulb.edu/t/IRA-Public/views/UndergraduateStudents/FTFSATCompAVGandSD?%3Aembed=y&%3AshowAppBanner=false&%3AshowShareOptions=true&%3Adisplay_count=no&%3AshowVizHome=no
+
+const normalizedDistributions = [["CSULB Local", new NormalDistribution(1060, 144),"#FFC61E"],["CSULB Non-local", new NormalDistribution(1159, 143),"#1E57FF"],["Harvard", new NormalDistribution(1530, 74),"#A41034"]]
 
 const data = []
 
-for (let gradePercentage = 20; gradePercentage < 101; gradePercentage++) {
-  const datum = {gradePercentage,
-    line:averageDistribution.pdf(gradePercentage*10),
-    lineCdf:averageDistribution.cdf(gradePercentage*10),
-    otherLine:betterDistribution.pdf(gradePercentage*10),
-    otherLineCdf:betterDistribution.cdf(gradePercentage*10)}
+for (let gradePercentage = 400; gradePercentage <= 1600; gradePercentage+=10) {
+  
+  let datum = {gradePercentage}
+
+  for (const [dataSource, distribution] of normalizedDistributions) {
+    datum = {...datum, [`${dataSource} Line`]:distribution.pdf(gradePercentage),[`${dataSource} CDF`]:distribution.cdf(gradePercentage)}
+  }
+
   data.push(datum)
 }
 console.log(data)
@@ -36,39 +41,19 @@ console.log(data)
 export default function App() {
   const [dataState,setDataState] = useState(data)
 
-  const renderTooltip = (props) => {
-    if (props.active) {
-      return (
-        <div >
-          <div className="tool-tip">
- 
-            <span className="tool-tip-footer">
-              {' '}
-             <a href="SOME_VALUE_FROM_PROPS">Google</a>
-           </span>
- 
-       </div>
- 
-     </div>
-   );
- }
-};
-
   const onGraphHover = (e) => {
   
       for (let i = data.length-1; i >= 0; --i) {
         const newDataState = [...dataState]
       if (i>=e.activeTooltipIndex){
-      newDataState[i].fill = newDataState[i].line
-      newDataState[i].otherFill = newDataState[i].otherLine
-
+        normalizedDistributions.forEach(([dataSource])=>{newDataState[i][`${dataSource} Fill`] = newDataState[i][`${dataSource} Line`]
+      })
     }
       else {
         if (newDataState[i].fill !== newDataState[i].line) {
           break
         }
-        delete newDataState[i].fill
-        delete newDataState[i].otherFill
+        normalizedDistributions.forEach(([dataSource])=>{delete newDataState[i][`${dataSource} Fill`]})
       }      
       setDataState(newDataState)
 
@@ -94,14 +79,12 @@ export default function App() {
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="gradePercentage" />
-      <YAxis />
-      <Tooltip  content={(value)=>renderTooltip(value)} style={'pointer-events: auto'}  trigger='click' />
-      <Area dataKey="fill" stroke="#8884d8" fill="#8884d8" />
-      <Area dataKey="line" stroke="#8884d8" fillOpacity="0" fill="#8884d8" />
-      
-      <Area dataKey="otherFill" stroke="#82ca9d" fill="#82ca9d" />
-      <Area dataKey="otherLine" stroke="#82ca9d" fillOpacity="0" fill="#82ca9d" />
 
+      {/* Keep Tooltip here because hovering over the graph somehow crashes when it's not present */}
+      <Tooltip />
+    {normalizedDistributions.map(([dataSource,_,color])=>[<Area key={`${dataSource} Fill`} dataKey={`${dataSource} Fill`} stroke={color} fill={color} />,
+    <Area key={`${dataSource} Line`} dataKey={`${dataSource} Line`} stroke={color} fillOpacity="0" fill={color} />])
+}
     </AreaChart>
   );
 }

@@ -80,7 +80,7 @@ export default function App() {
                 
                 const cdf =  datum[`${dataSource} CDF`]
               return <div>
-                <div><span style={{color}}>{dataSource}</span>: {((1-cdf)*100).toFixed(1)}% | {Math.ceil(Math.log(.5)/Math.log(cdf))} Candidates @ 50% Likeliness</div>
+                <div><span style={{color}}>{dataSource}</span>: {((1-cdf)*100).toFixed(1)}% | {Math.ceil(Math.log(.5)/Math.log(cdf)) || 1} Candidates @ 50% Likeliness</div>
                 </div>
   })}
             </div>

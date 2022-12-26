@@ -23,21 +23,20 @@ import MouseTooltip from 'react-sticky-mouse-tooltip';
   // Both local and non-local mean and SD are provided here: 
   // https://data.ir.csulb.edu/t/IRA-Public/views/UndergraduateStudents/FTFSATCompAVGandSD?%3Aembed=y&%3AshowAppBanner=false&%3AshowShareOptions=true&%3Adisplay_count=no&%3AshowVizHome=no
 
-const normalizedDistributions = [["CSULB Local", new NormalDistribution(1060, 144),"#FFC61E"],["CSULB Non-local", new NormalDistribution(1159, 143),"#1E57FF"],["Harvard", new NormalDistribution(1530, 74),"#A41034"]]
+const normalizedDistributions = [["CSULB Local", new NormalDistribution(1060, 144),"#ffe699"],["CSULB Non-local", new NormalDistribution(1159, 143),"#99b3ff"],["Harvard", new NormalDistribution(1530, 74),"#f6a2b7"]]
 
 const data = []
 
-for (let gradePercentage = 400; gradePercentage <= 1600; gradePercentage+=10) {
+for (let score = 400; score <= 1600; score+=10) {
   
-  let datum = {gradePercentage}
+  let datum = {score}
 
   for (const [dataSource, distribution] of normalizedDistributions) {
-    datum = {...datum, [`${dataSource} Line`]:distribution.pdf(gradePercentage),[`${dataSource} CDF`]:distribution.cdf(gradePercentage)}
+    datum = {...datum, [`${dataSource} Line`]:distribution.pdf(score),[`${dataSource} CDF`]:distribution.cdf(score)}
   }
 
   data.push(datum)
 }
-console.log(data)
 
 export default function App() {
   const [dataState,setDataState] = useState(data)
@@ -45,27 +44,30 @@ export default function App() {
   const [dataIndex, setDataIndex] = useState(0)
 
   const onGraphHover = (e) => {
-    setDataIndex(e.activeTooltipIndex)
-  
+    const newData = [...dataState]
       for (let i = data.length-1; i >= 0; --i) {
-        const newDataState = [...dataState]
       if (i>=e.activeTooltipIndex){
-        normalizedDistributions.forEach(([dataSource])=>{newDataState[i][`${dataSource} Fill`] = newDataState[i][`${dataSource} Line`]
+        normalizedDistributions.forEach(([dataSource])=>{newData[i][`${dataSource} Fill`] = newData[i][`${dataSource} Line`]
       })
     }
       else {
-        if (newDataState[i].fill !== newDataState[i].line) {
+        if (newData[i].fill !== newData[i].line) {
           break
         }
-        normalizedDistributions.forEach(([dataSource])=>{delete newDataState[i][`${dataSource} Fill`]})
+        normalizedDistributions.forEach(([dataSource])=>{delete newData[i][`${dataSource} Fill`]})
       }      
-      setDataState(newDataState)
-      setIsTooltipVisible(true)
     }
+    setDataState(newData)
+    if (typeof e.activeTooltipIndex === 'number') {
+      setDataIndex(e.activeTooltipIndex)
+    }
+    
+    if (!isTooltipVisible){
+    setIsTooltipVisible(true)}
 
   }
   const CustomTooltip = () => {
-    
+    const datum = dataState[dataIndex]
         return (
             <div style={{
                 padding: "3px 8px",
@@ -73,7 +75,14 @@ export default function App() {
                 backgroundColor: "rgba(23, 23, 23, 0.85)",
                 color: "white"
             }}>
-              {normalizedDistributions.map(([dataSource])=><div>{dataSource}: {((1-data[dataIndex][`${dataSource} CDF`])*100).toFixed(1)}%</div>)}
+               Score: {datum.score}
+              {normalizedDistributions.map(([dataSource,_,color])=>{
+                
+                const cdf =  datum[`${dataSource} CDF`]
+              return <div>
+                <div><span style={{color}}>{dataSource}</span>: {((1-cdf)*100).toFixed(1)}% | {Math.ceil(Math.log(.5)/Math.log(cdf))} Candidates @ 50% Likeliness</div>
+                </div>
+  })}
             </div>
         )
 
@@ -101,8 +110,9 @@ export default function App() {
       }}
 
       onMouseMove={onGraphHover}
+      onMouseLeave={()=>setIsTooltipVisible(false)}
     >
-      <XAxis dataKey="gradePercentage" />
+      <XAxis dataKey="score" />
 
       {/* Keep Tooltip here because hovering over the graph somehow crashes when it's not present */}
       <Tooltip content={<></>} />

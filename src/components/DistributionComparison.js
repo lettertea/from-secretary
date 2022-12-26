@@ -93,26 +93,23 @@ export default function App() {
     <>
             <MouseTooltip
           visible={isTooltipVisible}
-          offsetX={-200}
-          offsetY={-100}
+          offsetX={-250}
+          offsetY={-175}
         >
           < CustomTooltip />
         </MouseTooltip>
     <AreaChart
-      width={500}
-      height={400}
+      width={800}
+      height={500}
       data={dataState}
       margin={{
-        top: 10,
-        right: 30,
-        left: 0,
-        bottom: 0
-      }}
+        top: 5, right: 30, left: 20, bottom: 40,
+    }}
 
       onMouseMove={onGraphHover}
       onMouseLeave={()=>setIsTooltipVisible(false)}
     >
-      <XAxis dataKey="score" />
+      <XAxis dataKey="score" minTickGap={50}/>
 
       {/* Keep Tooltip here because hovering over the graph somehow crashes when it's not present */}
       <Tooltip content={<></>} />

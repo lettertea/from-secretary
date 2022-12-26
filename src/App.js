@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import AveragePercentile from "./components/AveragePercentile";
 import {Link} from "@material-ui/core";
 import SecretaryChart from "./components/SecretaryCharts/SecretaryChart";
+import DistributionComparison from "./components/DistributionComparison"
 
 function App() {
     return (
@@ -133,6 +134,13 @@ function App() {
                 between needing to evaluate
                 more candidates, choosing a candidate, or changing your behavior to get a different distribution of
                 candidates.
+            </p>
+
+            <h1>Abandoning the "Numbers Game"</h1>
+            <p>
+                Comparing distributions
+                <DistributionComparison/>
+
             </p>
             <h1>Motivation</h1>
             <p>I feel like there's a lot of pressure to find the "perfect" person to marry, the "dream" job, or the

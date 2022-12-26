@@ -24,7 +24,7 @@ ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
             <Container maxWidth={"md"}>
-                <DistributionComparison/>
+                <App/>
             </Container>
         </ThemeProvider>
     </React.StrictMode>,

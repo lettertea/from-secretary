@@ -3,33 +3,16 @@ import React, {useState} from "react"
 import {getCandidate} from "./satData"
 import {Typography} from "@material-ui/core";
 
-const SIMULATIONS = 2500
-const MAX_CANDIDATE = 100
+const TOTAL_POOL = 100
 
-const getData = (passRate) => {
-    let data = []
-    const TOTAL_CANDIDATES = SIMULATIONS * MAX_CANDIDATE
+const getData = (likeliness) => {
+    const data = []
 
-    const bestCandidates = []
+    for (let n = 1; n <= TOTAL_POOL; n++) {
+        const cutoffCandidate = getCandidate(Math.pow(1-(likeliness/100),1/n))
+        data.push({x:n,bestScore: cutoffCandidate.score,
+            percentile: cutoffCandidate.percentile})
 
-    // Add 1 to do an extra loop to add the last cutoff candidate to data
-    for (let i = 0; i < TOTAL_CANDIDATES + 1; i++) {
-        const currentCandidate = Math.random()
-        const j = i % SIMULATIONS
-        if (i < SIMULATIONS) {
-            bestCandidates.push(currentCandidate)
-        } else {
-            if (j === 0) {
-                const sortedCandidates = [...bestCandidates].sort((a, b) => b - a)
-                const cutoffCandidate = getCandidate(sortedCandidates[Math.floor(bestCandidates.length * (passRate / 100))])
-                data.push({
-                    x: Math.floor(i / SIMULATIONS),
-                    bestScore: cutoffCandidate.score,
-                    percentile: cutoffCandidate.percentile,
-                })
-            }
-            bestCandidates[j] = Math.max(bestCandidates[j], currentCandidate)
-        }
     }
     return data
 
@@ -102,8 +85,7 @@ export default props => {
                 <Tooltip content={<CustomTooltip/>}/>
                 <Line type="monotone" dataKey="bestScore" stroke="#8884d8" activeDot={{r: 8}}/>
             </LineChart>
-            <Typography variant={"caption"}>Best score of varying candidate pool sizes
-                of {SIMULATIONS} simulations</Typography>
+            <Typography variant={"caption"}>bestScore = (1 - likeliness)^(1/ totalPool)</Typography>
 
         </div>
     )

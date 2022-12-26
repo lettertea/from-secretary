@@ -9,6 +9,7 @@ import {
   Line
 } from "recharts";
 import NormalDistribution from "normal-distribution";
+import MouseTooltip from 'react-sticky-mouse-tooltip';
 
   // 62.1% is the national average score (1490/2400)
   // 13.5% is the national average SD (323/2400)
@@ -40,8 +41,11 @@ console.log(data)
 
 export default function App() {
   const [dataState,setDataState] = useState(data)
+  const [isTooltipVisible,setIsTooltipVisible] = useState(false)
+  const [dataIndex, setDataIndex] = useState(0)
 
   const onGraphHover = (e) => {
+    setDataIndex(e.activeTooltipIndex)
   
       for (let i = data.length-1; i >= 0; --i) {
         const newDataState = [...dataState]
@@ -56,14 +60,35 @@ export default function App() {
         normalizedDistributions.forEach(([dataSource])=>{delete newDataState[i][`${dataSource} Fill`]})
       }      
       setDataState(newDataState)
-
+      setIsTooltipVisible(true)
     }
 
   }
-  
+  const CustomTooltip = () => {
+    
+        return (
+            <div style={{
+                padding: "3px 8px",
+                borderRadius: 3,
+                backgroundColor: "rgba(23, 23, 23, 0.85)",
+                color: "white"
+            }}>
+              {normalizedDistributions.map(([dataSource])=><div>{dataSource}: {((1-data[dataIndex][`${dataSource} CDF`])*100).toFixed(1)}%</div>)}
+            </div>
+        )
+
+}
 
 
   return (
+    <>
+            <MouseTooltip
+          visible={isTooltipVisible}
+          offsetX={-200}
+          offsetY={-100}
+        >
+          < CustomTooltip />
+        </MouseTooltip>
     <AreaChart
       width={500}
       height={400}
@@ -77,14 +102,13 @@ export default function App() {
 
       onMouseMove={onGraphHover}
     >
-      <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="gradePercentage" />
 
       {/* Keep Tooltip here because hovering over the graph somehow crashes when it's not present */}
-      <Tooltip />
+      <Tooltip content={<></>} />
     {normalizedDistributions.map(([dataSource,_,color])=>[<Area key={`${dataSource} Fill`} dataKey={`${dataSource} Fill`} stroke={color} fill={color} />,
     <Area key={`${dataSource} Line`} dataKey={`${dataSource} Line`} stroke={color} fillOpacity="0" fill={color} />])
 }
-    </AreaChart>
+    </AreaChart></>
   );
 }

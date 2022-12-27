@@ -85,7 +85,7 @@ export default props => {
                 <Tooltip content={<CustomTooltip/>}/>
                 <Line type="monotone" dataKey="bestScore" stroke="#8884d8" activeDot={{r: 8}}/>
             </LineChart>
-            <Typography variant={"caption"}>bestScore = (1 - likeliness)^(1/ totalPool)</Typography>
+            <Typography variant={"caption"}>bestPerformerPercentile = (1 - likeliness)^(1/ totalPool)</Typography>
 
         </div>
     )

@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import NormalDistribution from "normal-distribution";
 import MouseTooltip from 'react-sticky-mouse-tooltip';
+import {Typography, Link} from "@material-ui/core";
 
   // 62.1% is the national average score (1490/2400)
   // 13.5% is the national average SD (323/2400)
@@ -80,7 +81,7 @@ export default function App() {
                 
                 const cdf =  datum[`${dataSource} CDF`]
               return <div>
-                <div><span style={{color}}>{dataSource}</span>: {((1-cdf)*100).toFixed(1)}% | {Math.ceil(Math.log(.5)/Math.log(cdf)) || 1} Candidates @ 50% Likeliness</div>
+                <div><span style={{color}}>{dataSource}</span>: {((1-cdf)*100).toFixed(1)}%<div>Best of {Math.ceil(Math.log(.5)/Math.log(cdf)) || 1} Candidates with 50% Likeliness</div></div>
                 </div>
   })}
             </div>
@@ -115,7 +116,13 @@ export default function App() {
       <Tooltip content={<></>} />
     {normalizedDistributions.map(([dataSource,_,color])=>[<Area key={`${dataSource} Fill`} dataKey={`${dataSource} Fill`} stroke={color} fill={color} />,
     <Area key={`${dataSource} Line`} dataKey={`${dataSource} Line`} stroke={color} fillOpacity="0" fill={color} />])
-}
-    </AreaChart></>
+}            
+
+    </AreaChart>
+    <Typography variant={"caption"}>Comparison of <Link
+                href="https://data.ir.csulb.edu/t/IRA-Public/views/UndergraduateStudents/FTFSATCompAVGandSD?%3Aembed=y&%3AshowAppBanner=false&%3AshowShareOptions=true&%3Adisplay_count=no&%3AshowVizHome=no"
+                target="_blank" rel="noopener noreferrer">CSULB local/non-local (Fall 2017)</Link> and <Link
+                href="https://blog.prepscholar.com/sat-scores-for-colleges"
+                target="_blank" rel="noopener noreferrer">Harvard (unknown) </Link> distributions on the 1600 SAT scale</Typography></>
   );
 }

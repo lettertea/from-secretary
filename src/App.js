@@ -138,9 +138,11 @@ function App() {
 
             <h1>Abandoning the "Numbers Game"</h1>
             <p>
-                Comparing distributions
+            My personal opinion is that “playing the numbers game” can be a dangerous mindset to have since it's easy to mindlessly skim through candidates without reflecting and adapting. It’s important to evaluate a decent number of candidates, no question. But it loses meaning if no lessons are learned from why those candidates were rejected. It’s easy to go on auto-pilot and continue doing the same thing, hoping that adding more numbers will get better candidates. And sometimes that works because luck and outliers are a thing. But finding a different pool of candidates might be the more effective strategy.</p><p>
+            In the chart below, there are 3 populations being compared to each other. The two on the left are students who enrolled in CSULB for Fall 2017, and the one on the right is students enrolled (or admitted) to Harvard. The only difference between those two CSULB pools is whether or not they graduated from a high school local to the CSULB area.
                 <DistributionComparison/>
-
+<p>In this context, local students are given preference in admissions. If the goal is to find students who performed well in their SAT, targeting non-local students would yield better results on average. A small change in behavior can make a large difference. And a larger change in behavior, such as going to Harvard, is likely to make an even larger difference.
+</p>
             </p>
             <h1>Motivation</h1>
             <p>I feel like there's a lot of pressure to find the "perfect" person to marry, the "dream" job, or the

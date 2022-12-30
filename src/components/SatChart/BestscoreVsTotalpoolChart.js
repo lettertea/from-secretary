@@ -52,7 +52,7 @@ export default props => {
             <p>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        Likeliness (%):
+                        Possibility (%):
                         <input
                             onChange={event => likelinessInput = event.target.value}
                             placeholder={50}
@@ -75,17 +75,17 @@ export default props => {
                     top: 5, right: 30, left: 20, bottom: 40,
                 }}
             ><CartesianGrid strokeDasharray="3 3"/>
-                <XAxis dataKey={"x"} label={{value: "Total Pool", position: "bottom"}}/>
+                <XAxis dataKey={"x"} label={{value: "Candidates Evaluated", position: "bottom"}}/>
                 <YAxis
                     label={{
-                        value: "Best Score",
+                        value: "Best Candidate Score",
                         position: "insideLeft", angle: -90, dy: 40,
                     }}
                     domain={[1400, 2400]}/>
                 <Tooltip content={<CustomTooltip/>}/>
                 <Line type="monotone" dataKey="bestScore" stroke="#8884d8" activeDot={{r: 8}}/>
             </LineChart>
-            <Typography variant={"caption"}>bestPerformerPercentile = (1 - likeliness)^(1/ totalPool)</Typography>
+            <Typography variant={"caption"}>bestCandidatePercentile = (1 - possibility)^(1/ totalPool)</Typography>
 
         </div>
     )

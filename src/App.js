@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import DiceChart from "./components/DiceChart";
-import SatChart from "./components/SatChart";
+import BestscoreVsTotalpoolChart from "./components/SatChart/BestscoreVsTotalpoolChart";
 import Typography from "@material-ui/core/Typography";
 import AveragePercentile from "./components/AveragePercentile";
 import {Link} from "@material-ui/core";
@@ -43,7 +43,7 @@ function App() {
 
 <p>The secretary approach isn't always the most practical approach since it’s not like we always have to evaluate and reject one candidate at a time with no going back. Real life situations can differ. But the insightful thing about it is the stopping rule. By evaluating some number of candidates before deciding, we better understand the pool of candidates we’re looking at. This is especially important when exploring an unfamiliar pool of candidates since we often have little to no understanding of what makes a "good" candidate.</p>
 <p>The chart below calculates the best candidate (from the 2015 College Board dataset) seen given the probability (AKA luck) and number of candidates evaluated. It can be used to help evaluate how good a distribution is in producing candidates. For example, with 27 candidates evaluated at random, there’s a 50% probability at least a 99 percentile (2250) candidate was found. If that candidate is not sufficient for your needs, it may be best to consider changing how you’re getting candidates.</p>
-<SatChart/>
+<BestscoreVsTotalpoolChart chartDimension={[800,500]}/>
 <h1>“Big fish, small pond”</h1>
 <p>The chart earlier is based on a perfect representation of all the SAT test takers in 2015. Sample bias is extremely common–even if we’re trying to avoid it. Our particular distribution may be very different from the actual global distribution. We can find an outlier 99 percentile candidate. But a 99 percentile candidate within a poorly performing distribution may be, say, a 70 percentile candidate globally.</p>
 <p>But before giving up on a distribution, it’s important to understand it first. Sometimes worse performing distributions are preferable. Perhaps they’re faster and more accurate to evaluate, using far less time, money, and effort. The reason can vary so much in practice, so it’s difficult to give a blanket answer.</p>

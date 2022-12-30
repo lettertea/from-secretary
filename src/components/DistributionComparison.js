@@ -110,7 +110,7 @@ export default function App() {
       onMouseMove={onGraphHover}
       onMouseLeave={()=>setIsTooltipVisible(false)}
     >
-      <XAxis dataKey="score" minTickGap={50}/>
+      <XAxis dataKey="score" minTickGap={50} label={{value: "Score", position: "bottom"}}/>
 
       {/* Keep Tooltip here because hovering over the graph somehow crashes when it's not present */}
       <Tooltip content={<></>} />

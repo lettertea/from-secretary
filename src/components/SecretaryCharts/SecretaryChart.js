@@ -17,9 +17,24 @@ export default () => {
         return simulationData
     })
 
+    
     const colors = ["#3969b1", "#da7c30", "#3e9651"]
-
-
+    const CustomTooltip = ({active, payload, label}) => {
+        if (active) {
+            return (
+                <div style={{
+                    padding: "3px 8px",
+                    borderRadius: 3,
+                    backgroundColor: "#fff",
+                    outline:"1px outset black"
+                }}>
+                    <div>Total Population: {label}</div>
+                    {payload.slice(0).reverse().map((pay)=><div style={{color:pay.color}}>{pay.name}: {pay.value.toFixed(2)}</div>)}
+                </div>
+            )
+        }
+        return null
+    }
 
     useEffect(() => {
         const _data = []
@@ -61,7 +76,7 @@ export default () => {
                         position: "insideLeft", angle: -90, dy: 40,
                     }}
                 />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip/>}/>
                 {STRATEGIES.map((e, i) => <Line type="monotone" dataKey={e} stroke={colors[i]} activeDot={{r: 8}}/>)}
             </LineChart>
             <Typography variant={"caption"}>Average of running the secretary algorithm {SIMULATIONS} times</Typography>

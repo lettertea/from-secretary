@@ -7,35 +7,31 @@ import {computeSecretarySimulations, DEPENDENT_VARIABLES, SIMULATIONS, STRATEGIE
 import {Typography} from "@material-ui/core";
 
 
-const getData = (secretarySimulationData, dependentVariable) => {
-    const data = [];
-    for (let i = 2; i < 100; i++) {
-        const secretarySimulationData = computeSecretarySimulations(i)
-        const dataPoint = {x: i}
-        for (let strategy of STRATEGIES) {
-            dataPoint[strategy] = secretarySimulationData[dependentVariable][strategy]
-        }
-        data.push(dataPoint)
-    }
-    return data;
-}
-
-
 export default () => {
     const [dependentVariable, setDependentVariable] = React.useState(DEPENDENT_VARIABLES[0])
-    const secretarySimulationData = []
+    const [data,setData] = React.useState(()=>{
+        const simulationData = []
+        for (let i = 2; i < 100; i++) {
+            simulationData.push({x:i,...computeSecretarySimulations(i)})
+        }
+        return simulationData
+    })
 
     const colors = ["#3969b1", "#da7c30", "#3e9651"]
 
 
+
     useEffect(() => {
-        for (let i = 2; i < 100; i++) {
-            secretarySimulationData.push({
-                x: i,
-                data: computeSecretarySimulations(i)
-            })
+        const _data = []
+        for (const dataPoint of data) {
+            for (let strategy of STRATEGIES) {
+                dataPoint[strategy] = dataPoint[dependentVariable][strategy]
+            }
+            _data.push(dataPoint)
         }
-    }, [])
+        setData(_data)
+    }, [dependentVariable])
+
 
     return (
         <div>
@@ -52,7 +48,7 @@ export default () => {
             <LineChart
                 width={800}
                 height={500}
-                data={getData(secretarySimulationData, dependentVariable)}
+                data={data}
                 margin={{
                     top: 5, right: 30, left: 20, bottom: 40,
                 }}

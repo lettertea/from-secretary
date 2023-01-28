@@ -81,7 +81,7 @@ export default function App() {
                 
                 const cdf =  datum[`${dataSource} CDF`]
               return <div>
-                <div><span style={{color}}>{dataSource}</span>: {((1-cdf)*100).toFixed(1)}%<div>Best of {Math.ceil(Math.log(.5)/Math.log(cdf)) || 1} Candidates with 50% Likeliness</div></div>
+                <div><span style={{color}}>{dataSource}</span>: {((1-cdf)*100).toFixed(1)}%<div>Best of {Math.ceil(Math.log(.5)/Math.log(cdf)) || 1} Candidates with 50% probability</div></div>
                 </div>
   })}
             </div>
@@ -121,8 +121,8 @@ export default function App() {
     </AreaChart>
     <Typography variant={"caption"}>Comparison of <Link
                 href="https://data.ir.csulb.edu/t/IRA-Public/views/UndergraduateStudents/FTFSATCompAVGandSD?%3Aembed=y&%3AshowAppBanner=false&%3AshowShareOptions=true&%3Adisplay_count=no&%3AshowVizHome=no"
-                target="_blank" rel="noopener noreferrer">CSULB local/non-local (Fall 2017)</Link> and <Link
+                target="_blank" rel="noopener noreferrer">CSULB local [mean=1060 SD=144]/non-local [mean=1159 SD=143] (Fall 2017)</Link> and <Link
                 href="https://blog.prepscholar.com/sat-scores-for-colleges"
-                target="_blank" rel="noopener noreferrer">Harvard (unknown) </Link> distributions on the 1600 SAT scale</Typography></>
+                target="_blank" rel="noopener noreferrer">Harvard [mean=1530 SD=74](unknown year) </Link> distributions on the 1600 SAT scale</Typography></>
   );
 }

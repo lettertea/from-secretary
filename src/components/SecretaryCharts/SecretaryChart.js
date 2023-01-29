@@ -11,7 +11,7 @@ export default () => {
     const [dependentVariable, setDependentVariable] = React.useState(DEPENDENT_VARIABLES[0])
     const [data,setData] = React.useState(()=>{
         const simulationData = []
-        for (let i = 2; i < 100; i++) {
+        for (let i = 50; i <= 1000; i += 50) {
             simulationData.push({x:i,...computeSecretarySimulations(i)})
         }
         return simulationData

@@ -5,14 +5,14 @@ const CANDIDATE_PERCENTILE = "Average Percentile (%)"
 const CANDIDATE_LOCATION = "Selected Candidate Location"
 const CANDIDATE_RANK = "Selected Candidate Rank"
 
-const SIMULATIONS = 250
+const SIMULATIONS = 100
 
 export {SIMULATIONS}
 export const DEPENDENT_VARIABLES = [CANDIDATE_RANK, CANDIDATE_LOCATION, SUCCESS_RATE]
 
 const EULER_STRATEGY = "1/e"
 const QUARTER_STRATEGY = "0.25"
-const ROOT_STRATEGY = "sqrt(N)"
+const ROOT_STRATEGY = "√N"
 
 const STRATEGIES = [EULER_STRATEGY, QUARTER_STRATEGY, ROOT_STRATEGY]
 export {STRATEGIES}

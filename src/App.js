@@ -56,7 +56,7 @@ function App() {
 <h3>Picking poorer performing population</h3>
 <p>It’s sometimes preferable to pick a poorer performing population. Sometimes candidates have a will of their own and can reject the evaluator, and poorer performing populations may not reject as often.</p>
 <p>It can also be less expensive in terms of costs, speed, effort, etc. too, making it much easier to evaluate a larger number of candidates to find outliers.</p>
-<p>However, a distribution that is poorer performing doesn't always mean that candidates will reject the evaluator less or be less expensive to evaluate. Sometimes the opposite is true where better performing populations will accept evaluators more or be less expensive to evaluate.</p>
+<p>However, a distribution that is poorer performing doesn't always mean that candidates will reject the evaluator less or that they'll be more expensive to evaluate. Sometimes the opposite is true, and it's something to keep in mind since it can feel unintuitive.</p>
 <h3>Number of candidates to evaluate</h3>
 <p>Diverse normal distributions (large standard deviations or wide bell curves) have outliers that perform much better than mean performers (like CSULB for SAT) compared to relatively homogeneous distributions (like Harvard for SAT). For those diverse populations, it can be more beneficial to evaluate a larger number of candidates to find those outliers.</p>
 <h1>Motivation</h1>
